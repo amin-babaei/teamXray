@@ -4,7 +4,7 @@ import { toastSuccess } from "../helpers/Toast";
 import { applySchema } from "../helpers/validation";
 import { useNavigate } from "react-router-dom";
 import Loading from "../helpers/Loading";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { loadingSpinner } from "../app/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
 

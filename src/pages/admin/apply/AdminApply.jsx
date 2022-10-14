@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Loading from "../../../helpers/Loading";
 import { getAllApply } from './../../../services/apply';
 import ApplyDrop from './ApplyDrop';

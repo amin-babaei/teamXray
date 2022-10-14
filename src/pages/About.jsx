@@ -1,6 +1,6 @@
 import Social from "../components/common/Social";
 import { dataAbout } from "./../data/dataAbout";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 const About = () => {
   return (
     <main className="bg-black pb-16">

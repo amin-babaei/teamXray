@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { loadingSpinner } from "../../app/loadingSlice";
 import { useSelector,useDispatch } from "react-redux";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { getTeam } from "../../services/team";
 

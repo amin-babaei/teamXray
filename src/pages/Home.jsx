@@ -7,7 +7,7 @@ import ContactUs from '../components/ContactUs';
 import Footer from '../components/common/Footer';
 import Partners from './../components/Partners';
 import Mobile from './../components/menu/Mobile';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import BlogItem from "../../components/blog/BlogItem";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Loading from './../../helpers/Loading';
 import { fetchBlogs } from "../../app/blog/blogAction";
 

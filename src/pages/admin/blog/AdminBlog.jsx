@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import EditBlog from './EditBlog';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import Loading from '../../../helpers/Loading';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import config from '../../../services/config.json'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadingSpinner } from '../../../app/loadingSlice';

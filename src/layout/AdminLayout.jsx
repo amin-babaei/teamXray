@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {NavLink, Outlet } from "react-router-dom";
 const AdminLayout = () => {
   return (

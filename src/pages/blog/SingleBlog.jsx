@@ -7,7 +7,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import BreadCrumb from '../../helpers/BreadCrumb';
 import Loading from '../../helpers/Loading';
 import CopyUrl from '../../helpers/CopyUrl';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import config from '../../services/config.json'
 
 const SingleBlog = () => {

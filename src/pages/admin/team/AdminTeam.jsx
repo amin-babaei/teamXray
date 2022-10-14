@@ -6,7 +6,7 @@ import Loading from '../../../helpers/Loading';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import DeleteTeam from './DeleteTeam';
 import Players from './Players';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import config from '../../../services/config.json'
 import { loadingSpinner } from '../../../app/loadingSlice';
 import { useDispatch, useSelector } from 'react-redux';

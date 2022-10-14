@@ -19,7 +19,7 @@ const CartPlayer = ({ player }) => {
             />
           ) : (
             <img
-              src={`${config.localapi}/${player.image}`}
+              src={`${config.serverapi}/${player.image}`}
               alt="Avatar"
               style={{ width: "100%", height: "100%" }}
             />

@@ -53,7 +53,7 @@ const AdminBlog = () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {blogList.Blogs?.map(blog => (
           <div key={blog._id}>
-            <img src={`${config.localapi}/${blog.imageUrl}`}alt={blog.title} className="h-64"/>
+            <img src={`${config.serverapi}/${blog.imageUrl}`}alt={blog.title} className="h-64"/>
             <div className='flex justify-between'>
               <EditBlog blogTitle={blog.title} blogId={blog._id}/>
               <DeleteBlog deleted={()=>deletedBlog(blog._id)}/>

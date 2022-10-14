@@ -30,7 +30,7 @@ const Teams = () => {
               key={item._id}
             >
               <img
-                src={`${config.localapi}/${item.banner}`}
+                src={`${config.serverapi}/${item.banner}`}
                 alt={item.name}
                 className="h-72 w-full transition-all duration-500 hover:scale-125 group-hover:opacity-50"
               />

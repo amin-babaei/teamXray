@@ -1,0 +1,44 @@
+#root{
+  background-color: black;
+}
+.bg-layout{
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(218,24,45,1) 100%);
+}
+.swiper-button-next,.swiper-button-prev{
+  background-color: red;
+  width: 40px !important;
+  height: 60px !important;
+  top:40% !important;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+  color: black;
+  font-size: 25px !important;
+}
+.swiper-button-next{
+  right: 0 !important;
+}
+.swiper-button-prev{
+  left: 0 !important;
+}
+.contact .swiper-button-prev{
+  display: none;
+}
+.contact .swiper-button-next{
+  display: none;
+}
+.swiper-slide.swiper-slide-active .curent{
+  transform: scale(1) !important;
+  opacity: 1 !important;
+  ;
+}
+.transstyle{
+  transform-style: preserve-3d;
+}
+.xtrans{
+  transform:rotateY(180deg)
+}
+.xface{
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}

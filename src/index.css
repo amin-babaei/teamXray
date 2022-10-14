@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "xray";
+    src: url("/public/fonts/BatmanForeverAlternate.eot");
+    src: 
+      url("/public/fonts/BatmanForeverAlternate.woff2") format("woff2"),
+      url("/public/fonts/BatmanForeverAlternate.woff") format("woff"),
+      url("/public/fonts/BatmanForeverAlternate.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+@layer components{
+    .containerr{
+        @apply container mx-auto px-5 text-white
+    }
+    .btn{
+        @apply bg-white text-black rounded-lg p-2 hover:opacity-60 transition-all
+    }
+    .link{
+        @apply hidden sm:block px-3 
+    }
+    .social{
+        @apply py-2 text-4xl mb-2 w-max
+    }
+    .input{
+        @apply w-full h-full py-2 px-3 mb-10 outline-none bg-transparent border-b border-white
+    }
+}

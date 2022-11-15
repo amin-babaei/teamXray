@@ -23,7 +23,7 @@ const Blog = () => {
     });
     setfilterData(allBlogs);
   };
-
+  console.log(query.text)
   return (
     <main className="bg-black font-main">
        <Helmet>
@@ -54,7 +54,7 @@ const Blog = () => {
           ))
           }
         </div>
-        {filterData.length === 0 && <h2 className="text-5xl text-center py-10">not found</h2>}
+        {filterData.length === 0 && Object.values(query.text).length > 0 && <h2 className="text-5xl text-center py-10">not found</h2>}
       </div>
     </main>
   );

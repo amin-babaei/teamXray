@@ -19,7 +19,7 @@
         @apply container mx-auto px-5 text-white
     }
     .btn{
-        @apply bg-white text-black rounded-lg p-2 hover:opacity-60 transition-all
+        @apply bg-white text-black rounded-lg p-2 duration-300 hover:opacity-60 transition-all
     }
     .link{
         @apply hidden sm:block px-3 

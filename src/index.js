@@ -8,15 +8,18 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import ErrorBoundary from './components/ErrorBoundary';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Provider store={store}>
-      <HelmetProvider>
-        <Xray />
-        <ToastContainer theme='dark' position='top-left' autoClose={4000} closeOnClick={true}/>
-      </HelmetProvider>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <HelmetProvider>
+          <Xray />
+          <ToastContainer theme='dark' position='top-left' autoClose={4000} closeOnClick={true}/>
+        </HelmetProvider>
+      </Provider>
+    </ErrorBoundary>
   </BrowserRouter>
   
 );

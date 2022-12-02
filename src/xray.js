@@ -5,17 +5,17 @@ import MainLayout from "./layout/MainLayout";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Apply from "./pages/Apply";
 import { useEffect, lazy, Suspense } from "react";
 
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import Apply from "./pages/Apply";
 import Loading from "./helpers/Loading";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, clearUser } from "./app/user/userSlice";
 import { toastError } from "./helpers/Toast";
 
-const Login = lazy(()=> import('./pages/Login'))
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const SingleBlog = lazy(() => import("./pages/blog/SingleBlog"));
 const Teams = lazy(() => import("./pages/team/Teams"));
@@ -61,7 +61,7 @@ const Xray = () => {
           <Route element={<MainLayout />}>
             <Route path="/about" element={<About />} />
             <Route path="/apply" element={<Apply />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login/>} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/blogs/:title" element={<SingleBlog />} />
             <Route path="/teams" element={<Teams />} />

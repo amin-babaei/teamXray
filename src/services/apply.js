@@ -1,9 +1,8 @@
 import http from "./httpService";
-import config from './config.json'
 
 export const getAllApply = () => {
-    return http.get(`${config.serverapi}/api/applyList`);
+    return http.get(`${process.env.SERVERAPI}/api/applyList`);
 };
 export const createApply = (apply) => {
-    return http.post(`${config.serverapi}/api/apply`,apply);
+    return http.post(`${process.env.SERVERAPI}/api/apply`,apply);
 };

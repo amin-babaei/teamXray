@@ -7,7 +7,6 @@ import EditBlog from './EditBlog';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import Loading from '../../../helpers/Loading';
 import { Helmet } from 'react-helmet-async';
-import config from '../../../services/config.json'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadingSpinner } from '../../../app/loadingSlice';
 import { fetchBlogs } from '../../../app/blog/blogAction';
@@ -53,7 +52,7 @@ const AdminBlog = () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {blogList.Blogs?.map(blog => (
           <div key={blog._id}>
-            <img src={`${config.serverapi}/${blog.imageUrl}`}alt={blog.title} className="h-64"/>
+            <img src={`${process.env.SERVERAPI}/${blog.imageUrl}`}alt={blog.title} className="h-64"/>
             <div className='flex justify-between'>
               <EditBlog blogTitle={blog.title} blogId={blog._id}/>
               <DeleteBlog deleted={()=>deletedBlog(blog._id)}/>

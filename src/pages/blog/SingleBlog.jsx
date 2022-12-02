@@ -8,7 +8,6 @@ import BreadCrumb from '../../helpers/BreadCrumb';
 import Loading from '../../helpers/Loading';
 import CopyUrl from '../../helpers/CopyUrl';
 import { Helmet } from 'react-helmet-async';
-import config from '../../services/config.json'
 
 const SingleBlog = () => {
   const {loading} = useSelector((state) => state.loading)
@@ -43,7 +42,7 @@ const SingleBlog = () => {
             <h1 className='text-2xl font-extrabold md:w-[35rem] md:text-3xl leading-10'>{post.title.split('-').join(' ')}</h1>
             <BreadCrumb title={post.title}/>
           </header>
-          <img src={`${config.serverapi}/${post.imageUrl}`} alt="" className='w-full h-60 sm:h-[31rem]'/>
+          <img src={`${process.env.SERVERAPI}/${post.imageUrl}`} alt="" className='w-full h-60 sm:h-[31rem]'/>
           <p className='text-lg leading-10 text-justify my-10'>{post.body}</p>
           <p className='my-5'>Published : {new Date(post.createdAt).toLocaleDateString()}</p>
           <CopyUrl/>

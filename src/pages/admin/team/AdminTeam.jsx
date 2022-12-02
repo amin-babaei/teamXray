@@ -7,7 +7,6 @@ import { toastError, toastSuccess } from '../../../helpers/Toast';
 import DeleteTeam from './DeleteTeam';
 import Players from './Players';
 import { Helmet } from 'react-helmet-async';
-import config from '../../../services/config.json'
 import { loadingSpinner } from '../../../app/loadingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams } from './../../../app/team/teamAction';
@@ -53,7 +52,7 @@ const AdminTeam = () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {teamList.Teams?.map(team => (
           <div key={team._id}>
-            <img src={`${config.serverapi}/${team.banner}`}alt={team.name} className="h-64 w-full"/>
+            <img src={`${process.env.SERVERAPI}/${team.banner}`}alt={team.name} className="h-64 w-full"/>
             <div className='flex justify-between'>
             <DeleteTeam deleted={()=>removeTeam(team._id)}/>
             <Players teamTitle={team.name} teamId={team._id}/>

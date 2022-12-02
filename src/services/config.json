@@ -1,4 +1,0 @@
-{
-    "localapi": "http://localhost:4000",
-    "serverapi":"https://teamxrayserver.herokuapp.com"
-}

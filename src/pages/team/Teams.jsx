@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import config from '../../services/config.json'
 import Loading from './../../helpers/Loading';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from './../../app/team/teamAction';
@@ -30,7 +29,7 @@ const Teams = () => {
               key={item._id}
             >
               <img
-                src={`${config.serverapi}/${item.banner}`}
+                src={`${process.env.SERVERAPI}/${item.banner}`}
                 alt={item.name}
                 className="h-72 w-full transition-all duration-500 hover:scale-125 group-hover:opacity-50"
               />

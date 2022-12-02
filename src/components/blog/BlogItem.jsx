@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import config from '../../services/config';
 const BlogItem = ({ post }) => {
   return (
     <>
@@ -10,7 +9,7 @@ const BlogItem = ({ post }) => {
       >
         <img
           className="w-full h-60 sm:h-72"
-          src={`${config.serverapi}/${post.imageUrl}`}
+          src={`${process.env.SERVERAPI}/${post.imageUrl}`}
           alt="Mountain"
         />
         <div className="px-6 py-4">

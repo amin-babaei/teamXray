@@ -52,7 +52,7 @@ const AdminTeam = () => {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {teamList.Teams?.map(team => (
           <div key={team._id}>
-            <img src={`${process.env.SERVERAPI}/${team.banner}`}alt={team.name} className="h-64 w-full"/>
+            <img src={`${process.env.REACT_APP_BASE_URL}/${team.banner}`}alt={team.name} className="h-64 w-full"/>
             <div className='flex justify-between'>
             <DeleteTeam deleted={()=>removeTeam(team._id)}/>
             <Players teamTitle={team.name} teamId={team._id}/>

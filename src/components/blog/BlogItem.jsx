@@ -9,7 +9,7 @@ const BlogItem = ({ post }) => {
       >
         <img
           className="w-full h-60 sm:h-72"
-          src={`${process.env.SERVERAPI}/${post.imageUrl}`}
+          src={`${process.env.REACT_APP_BASE_URL}/${post.imageUrl}`}
           alt="Mountain"
         />
         <div className="px-6 py-4">

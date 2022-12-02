@@ -18,7 +18,7 @@ const CartPlayer = ({ player }) => {
             />
           ) : (
             <img
-              src={`${process.env.SERVERAPI}/${player.image}`}
+              src={`${process.env.REACT_APP_BASE_URL}/${player.image}`}
               alt="Avatar"
               style={{ width: "100%", height: "100%" }}
             />

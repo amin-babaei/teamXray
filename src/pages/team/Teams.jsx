@@ -29,7 +29,7 @@ const Teams = () => {
               key={item._id}
             >
               <img
-                src={`${process.env.SERVERAPI}/${item.banner}`}
+                src={`${process.env.REACT_APP_BASE_URL}/${item.banner}`}
                 alt={item.name}
                 className="h-72 w-full transition-all duration-500 hover:scale-125 group-hover:opacity-50"
               />

@@ -7,7 +7,7 @@ export const userLogin = createAsyncThunk(
     'login',
     async ({ email, password }, { rejectWithValue }) => {
       try {
-        const { data,status } = await http.post(`${process.env.SERVERAPI}/api/login`,{ email, password },)
+        const { data,status } = await http.post(`${process.env.REACT_APP_BASE_URL}/api/login`,{ email, password },)
         if(status===200){
             localStorage.setItem('token', data.token)
             jwt_decode(data.token)

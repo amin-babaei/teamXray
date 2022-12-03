@@ -39,6 +39,7 @@ const SingleTeam = () => {
           {data.map((player) => (
             <CartPlayer key={player._id} player={player} />
           ))}
+          {data.length === 0 && <h2 className="text-5xl text-center py-10 font-main">not found</h2>}
         </div>
       </div>
     </section>

@@ -30,7 +30,7 @@ const SingleBlog = () => {
     fetch()
   },[])
   return (
-    <section className='bg-black py-16 font-xcontent'>
+    <section className='bg-black py-16 font-xcontent min-h-screen'>
       <Helmet>
         <title>{title.split("-").join(" ")}</title>
       </Helmet>
@@ -48,6 +48,7 @@ const SingleBlog = () => {
           <CopyUrl/>
         </main>
       ))}
+      {data.length === 0 && <h2 className="text-5xl text-center py-10 font-main">not found</h2>}
       </div>
     </section>
   )

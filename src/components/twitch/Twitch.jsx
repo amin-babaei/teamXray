@@ -14,7 +14,7 @@ const Twitch = () => {
     const fetchData = async ()=>{
       try{
         dispatch(loadingSpinner(true));
-        const {data} = await getAllPlayer.get('https://api.twitch.tv/helix/teams?name=xrayteam')
+        const {data} = await getAllPlayer.get('https://api.twitch.tv/helix/teams?name=faze')
         const allPlayers = await data.data[0].users
         const user = await allPlayers.map(user => user.user_id)
         const {data:lives} = await getAllLive([...user]).get('https://api.twitch.tv/helix/streams')

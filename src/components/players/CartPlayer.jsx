@@ -32,26 +32,34 @@ const CartPlayer = ({ player }) => {
             {player.instagram === "#" ? null : (
               <a
                 href={player.instagram}
-                className="fab fa-instagram flex-grow text-3xl py-2 bg-red-400 hover:bg-red-500 hover:text-white"
-              ></a>
+                className="flex-grow text-3xl py-2 bg-red-400 hover:bg-red-500 hover:text-white"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
             )}
             {player.youtube === "#" ? null : (
               <a
                 href={player.youtube}
-                className="fab fa-youtube flex-grow text-3xl py-2 bg-red-500 hover:bg-red-600 hover:text-white"
-              ></a>
+                className="flex-grow text-3xl py-2 bg-red-500 hover:bg-red-600 hover:text-white"
+              >
+                <i className="fab fa-youtube"></i>
+              </a>
             )}
             {player.twitch === "#" ? null : (
               <a
                 href={player.twitch}
-                className="fab fa-twitch flex-grow text-3xl py-2 bg-purple-500 hover:bg-purple-600 hover:text-white"
-              ></a>
+                className="flex-grow text-3xl py-2 bg-purple-500 hover:bg-purple-600 hover:text-white"
+              >
+                <i className="fab fa-twitch"></i>
+              </a>
             )}
             {player.twitter === "#" ? null : (
               <a
                 href={player.twitter}
-                className="fab fa-twitter flex-grow text-3xl py-2 bg-blue-400 hover:bg-blue-500 hover:text-white"
-              ></a>
+                className="flex-grow text-3xl py-2 bg-blue-400 hover:bg-blue-500 hover:text-white"
+              >
+                <i className="fab fa-twitter"></i>
+              </a>
             )}
           </section>
         </div>

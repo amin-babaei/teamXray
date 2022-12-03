@@ -45,26 +45,34 @@ const About = () => {
                     {item.instagram === "#" ? null : (
                       <a
                         href={item.instagram}
-                        className="fab fa-instagram flex-grow text-xl py-2 bg-red-400 hover:bg-red-500 hover:text-white"
-                      ></a>
+                        className='py-2 text-xl flex-grow bg-red-400 hover:bg-red-500 hover:text-white'
+                      >
+                        <i className="fab fa-instagram"></i>
+                      </a>
                     )}
                     {item.youtube === "#" ? null : (
                       <a
                         href={item.youtube}
-                        className="fab fa-youtube flex-grow text-xl py-2 bg-red-500 hover:bg-red-600 hover:text-white"
-                      ></a>
+                        className="flex-grow text-xl py-2 bg-red-500 hover:bg-red-600 hover:text-white"
+                      >
+                        <i className="fab fa-youtube"></i>
+                      </a>
                     )}
                     {item.twitch === "#" ? null : (
                       <a
                         href={item.twitch}
-                        className="fab fa-twitch flex-grow text-xl py-2 bg-purple-500 hover:bg-purple-600 hover:text-white"
-                      ></a>
+                        className="flex-grow text-xl py-2 bg-purple-500 hover:bg-purple-600 hover:text-white"
+                      >
+                        <i className="fab fa-twitch"></i>
+                      </a>
                     )}
                     {item.twitter === "#" ? null : (
                       <a
                         href={item.twitter}
-                        className="fab fa-twitter flex-grow text-xl py-2 bg-blue-400 hover:bg-blue-500 hover:text-white"
-                      ></a>
+                        className="flex-grow text-xl py-2 bg-blue-400 hover:bg-blue-500 hover:text-white"
+                      >
+                        <i className="fab fa-twitter"></i>
+                      </a>
                     )}
                   </div>
                 </div>

@@ -11,24 +11,34 @@ const Footer = () => {
             <div className="flex sm:flex-col justify-around my-5">
               <a
                 href="https://www.instagram.com/xrayteam/channel/?hl=en"
-                className="social fab fa-instagram hover:text-red-500"
-              ></a>
+                className="social hover:text-red-500"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
               <a
                 href="https://www.youtube.com/c/XRayTeam"
-                className="social fab fa-youtube hover:text-red-500"
-              ></a>
+                className="social hover:text-red-500"
+              >
+                <i className="fab fa-youtube"></i>
+              </a>
               <a
                 href="https://discord.gg/u9KSJYXu"
-                className="social fab fa-discord hover:text-red-500"
-              ></a>
+                className="social hover:text-red-500"
+              >
+                <i className="fab fa-discord"></i>
+              </a>
               <a
                 href="https://www.twitch.tv/team/xrayteam"
-                className="social fab fa-twitch hover:text-red-500"
-              ></a>
+                className="social hover:text-red-500"
+              >
+                <i className="fab fa-twitch"></i>
+              </a>
               <a
                 href="https://www.twitter.com/team/xrayteamgg"
-                className="social fab fa-twitter hover:text-red-500"
-              ></a>
+                className="social hover:text-red-500"
+              >
+                <i className="fab fa-twitter"></i>
+              </a>
             </div>
           </div>
           <div className="flex flex-col items-center mb-10">

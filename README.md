@@ -1,10 +1,11 @@
 # این وبسایت صرفا یک نمونه کار بوده و متعلق به xray team نمی باشد
 
 frontend : react - tailwindcss | backend : express.\
- از نکات قابل توجه در این پروژه استفاده از twitch api برای دریافت اطلاعات live stream می باشد.\
+از نکات قابل توجه در این پروژه ، استفاده از twitxh api برای دریافت اطلاعات live stream می باشد
 access admin page => email:admin@gmail.com || password :123456
 
 - Link Website : https://xrayteam.vercel.app
+
 ![next amazona](/public/images/xray.png)
 
 ## Available Scripts

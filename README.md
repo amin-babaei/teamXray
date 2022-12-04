@@ -10,15 +10,13 @@
 
 برای دسترسی به صفحه ادمین از ایمیل admin@gmail.com و پسورد 123456 استفاده نمایید.
 
+## Preview
+
 Link Website : https://xrayteam.vercel.app
 
 ![xray team](/public/images/xray.png)
 
-## Available Scripts
+## Contact ME
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Email: [aminbabaei_dev@yahoo.com](mailto:aminbabaei_dev@yahoo.com)
+- Instagram: [@aminnymous](https://www.instagram.com/aminnymous)

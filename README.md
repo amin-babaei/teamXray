@@ -1,17 +1,22 @@
 # این وبسایت صرفا یک نمونه کار بوده و متعلق به xray team نمی باشد
 
-frontend : react - tailwindcss | backend : express.\
- از نکات قابل توجه در این پروژه استفاده از twitch api برای دریافت اطلاعات live stream می باشد.\
-access admin page => email:admin@gmail.com || password :123456
+دراین پروژه از react js و tailwind css در سمت فرانت و از node js و express در سمت بک اند استفاده شده است.
 
-- Link Website : https://xrayteam.vercel.app
-![next amazona](/public/images/xray.png)
+در این پروژه از twitch api برای دریافت اطلاعات live stream استفاده شده است.
 
-## Available Scripts
+در این پروژه برای مدیریت state ها و دیتا ها از redux toolkit استفاده شده است.
 
-In the project directory, you can run:
+در این پروژه از yup و formik برای اعتبارسنجی فرم ها استفاده شده است.
 
-### `npm start`
+برای دسترسی به صفحه ادمین از ایمیل admin@gmail.com و پسورد 123456 استفاده نمایید.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Preview
+
+Link Website : https://xrayteam.vercel.app
+
+![xray team](/public/images/xray.png)
+
+## Contact ME
+
+- Email: [aminbabaei_dev@yahoo.com](mailto:aminbabaei_dev@yahoo.com)
+- Instagram: [@aminnymous](https://www.instagram.com/aminnymous)

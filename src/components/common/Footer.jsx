@@ -75,7 +75,7 @@ const Footer = () => {
             © {new Date().getFullYear()} xrayteam. All right reserved.
           </h2>
           <p className="text-gray-400 text-xs text-right">
-            developed by <a href="https://github.com/aminonymous" className="text-xred">@aminonymous</a>
+            developed by <a href="https://github.com/amin-babaei" className="text-xred">@aminonymous</a>
           </p>
         </div>
       </div>

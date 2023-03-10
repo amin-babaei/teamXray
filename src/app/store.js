@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loadingSlice from './loadingSlice'
 import userReducer from './user/userSlice'
-import blogReducer from './blog/blogSlice'
+import { blogSlice } from './features/blogSlice'
 import teamReducer from './team/teamSlice'
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    blogs:blogReducer,
-    teams:teamReducer,
-    loading:loadingSlice
-  }
+    teams: teamReducer,
+    loading: loadingSlice,
+    [blogSlice.reducerPath]: blogSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(blogSlice.middleware),
 })
 export default store

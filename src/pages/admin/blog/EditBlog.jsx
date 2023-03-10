@@ -1,16 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from "@headlessui/react";
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getBlog } from '../../../services/blog';
-import { updateBlogs } from './../../../services/blog';
+import { useSelector } from 'react-redux';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
-import { loadingSpinner } from '../../../app/loadingSlice';
+import { useEditBlogMutation, useGetBlogQuery } from '../../../app/features/blogSlice';
+import Loading from '../../../helpers/Loading';
 
-const EditBlog = ({ blogTitle, blogId }) => {
+const EditBlog = ({ blogTitle }) => {
   const { userInfo } = useSelector((state) => state.user)
-  const dispatch = useDispatch()
+  const { data } = useGetBlogQuery(blogTitle);
+  const [updateBlog, { isLoading: editLoading, isSuccess }] = useEditBlogMutation();
+
   const [state, setState] = useState({
     blog: {
       title: "",
@@ -29,23 +29,8 @@ const EditBlog = ({ blogTitle, blogId }) => {
   }
 
   useEffect(() => {
-    const fetch = async () => {
-      dispatch(loadingSpinner(true));
-      try {
-        setState({ ...state })
-        const { data } = await getBlog(blogTitle)
-        setState({
-          ...state,
-          blog: data.blog[0]
-        });
-        dispatch(loadingSpinner(false));
-      } catch (error) {
-        console.log(error);
-        dispatch(loadingSpinner(false));
-      }
-    }
-    fetch()
-  }, [])
+    setState({ ...state, blog: data?.blog[0] });
+  }, [data?.blog])
 
   const handleChangeInput = e => {
     const { name, value } = e.target
@@ -60,26 +45,19 @@ const EditBlog = ({ blogTitle, blogId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (userInfo?.role === "admin") {
-      try {
-        let data = new FormData()
-        data.append("title", blog.title.split(" ").join("-"))
-        data.append('description', blog.description)
-        data.append('body', blog.body)
-        data.append('imageUrl', blog.imageUrl)
-        dispatch(loadingSpinner(true));
-        const { status } = await updateBlogs(blogId, data)
-        if (status === 200) {
-          toastSuccess("Blog updated successfully")
-          dispatch(loadingSpinner(false));
-        }
-      } catch (err) {
-        console.log(err);
-        dispatch(loadingSpinner(false));
-      }
-    }
-    toastError('you dont have permission')
-  }
+      let data = new FormData()
+      data.append("title", blog.title.split(" ").join("-"))
+      data.append('description', blog.description)
+      data.append('body', blog.body)
+      data.append('imageUrl', blog.imageUrl)
 
+      await updateBlog(JSON.stringify(data))
+    } else toastError('you dont have permission')
+  }
+  if (editLoading) return <Loading />
+  if (isSuccess) {
+    toastSuccess("Blog updated successfully")
+  }
   return (
     <>
       <button className="flex justify-around items-center w-full bg-yellow-500 py-3" onClick={openModal}>
@@ -136,7 +114,7 @@ const EditBlog = ({ blogTitle, blogId }) => {
                       className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm mb-5"
                       placeholder="title"
                       name="title"
-                      value={blog.title}
+                      value={blog?.title}
                       onChange={handleChangeInput}
                     />
                     <input
@@ -144,13 +122,13 @@ const EditBlog = ({ blogTitle, blogId }) => {
                       className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm"
                       placeholder="description"
                       name="description"
-                      value={blog.description}
+                      value={blog?.description}
                       onChange={handleChangeInput}
                     />
                     <textarea
                       name="body"
                       onChange={handleChangeInput}
-                      value={blog.body}
+                      value={blog?.body}
                       className="resize-none p-2 rounded-md my-5 w-full h-32 bg-black border outline-none focus:border-xred"
                       placeholder="type body blog here"
                     ></textarea>

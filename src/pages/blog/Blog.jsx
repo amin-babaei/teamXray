@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useState } from "react";
 import BlogItem from "../../components/blog/BlogItem";
 import { Helmet } from "react-helmet-async";
 import Loading from './../../helpers/Loading';
-import { fetchBlogs } from "../../app/blog/blogAction";
+import { useGetBlogListQuery } from "../../app/features/blogSlice";
 
 const Blog = () => {
-  const blogList = useSelector(({blogs:listBlogs}) => listBlogs)
-  const dispatch = useDispatch()
-
+  const { data, isError, isLoading } = useGetBlogListQuery()
   const [query, setQuery] = useState({ text: "" });
   const [filterData, setfilterData] = useState([]);
 
-  useEffect(()=>{
-    dispatch(fetchBlogs())
-  },[])
- 
   const blogSearch = (event) => {
     setQuery({ ...query, text: event.target.value });
-    const allBlogs = blogList.blogList.Blogs.filter((blog) => {
+    const allBlogs = data?.Blogs.filter((blog) => {
       return blog.title.toLowerCase().includes(event.target.value.split(" ").join("-"));
     });
     setfilterData(allBlogs);
   };
-  console.log(query.text)
+
   return (
     <main className="bg-black font-main">
        <Helmet>
@@ -44,9 +37,9 @@ const Blog = () => {
             onChange={blogSearch}
           />
         </div>
-        {blogList.loading === true && <Loading/>}
+        {isLoading && <Loading/>}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {Object.values(query.text).length < 1 ? blogList.blogList.Blogs?.map((blog) => (
+        {Object.values(query.text).length < 1 ? data?.Blogs.map((blog) => (
             <BlogItem post={blog} key={blog._id} />
             ))
           :filterData.map(blog => (
@@ -54,7 +47,7 @@ const Blog = () => {
           ))
           }
         </div>
-        {filterData.length === 0 && Object.values(query.text).length > 0 && <h2 className="text-5xl text-center py-10">not found</h2>}
+        {(filterData.length === 0 || isError) && Object.values(query.text).length > 0 && <h2 className="text-5xl text-center py-10">not found</h2>}
       </div>
     </main>
   );

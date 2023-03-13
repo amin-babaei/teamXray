@@ -4,14 +4,18 @@ import { Helmet } from "react-helmet-async";
 import Loading from './../../helpers/Loading';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from './../../app/features/team/teamAction';
+import { selectAllTeams } from "../../app/features/team/teamSlice";
 
 const Teams = () => {
-  const allTeams = useSelector(({ teams: listTeams }) => listTeams)
+  const allTeams = useSelector(selectAllTeams)
+  const { status } = useSelector(state => state.teams)
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    dispatch(fetchTeams())
-  },[dispatch])
+  useEffect(() => {
+    if (status === 'idle') {
+        dispatch(fetchTeams());
+    }
+}, [dispatch, status]);
 
   return (
     <section className="bg-black font-main min-h-screen">
@@ -21,9 +25,9 @@ const Teams = () => {
         <meta name="description" content="teams xray team" />
       </Helmet>
       <div className="containerr py-16">
-          {allTeams.loading === true && <Loading/>}
+          {status === "loading" && <Loading/>}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {allTeams.teamList?.Teams?.map(item => (
+          {allTeams.map(item => (
             <div
               className="overflow-hidden relative group rounded-md"
               key={item._id}

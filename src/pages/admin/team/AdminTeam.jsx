@@ -7,11 +7,12 @@ import Players from './Players';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams, removedTeam } from '../../../app/features/team/teamAction';
+import { selectAllTeams } from '../../../app/features/team/teamSlice';
 
 const AdminTeam = () => {
   const { userInfo } = useSelector((state) => state.user)
-  const allTeams = useSelector(({ teams: listTeams }) => listTeams)
-
+  const allTeams = useSelector(selectAllTeams)
+  const { status } = useSelector(state => state.teams)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -30,9 +31,9 @@ const AdminTeam = () => {
       </Helmet>
       <AddTeam />
       <section className='my-5'>
-        {allTeams.loading && <Loading />}
+        {status === 'loading' && <Loading />}
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-          {allTeams.teamList?.Teams?.map(team => (
+          {allTeams.map(team => (
             <div key={team._id}>
               <img src={`${process.env.REACT_APP_BASE_URL}/${team.banner}`} alt={team.name} className="h-64 w-full" />
               <div className='flex justify-between'>

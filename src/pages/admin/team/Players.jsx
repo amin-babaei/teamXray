@@ -5,11 +5,9 @@ import { toastError, toastSuccess } from '../../../helpers/Toast';
 import AddPlayer from './AddPlayer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeam, removedPlayer } from '../../../app/features/team/teamAction';
-import Loading from '../../../helpers/Loading';
 
 const Players = ({ teamTitle, teamId }) => {
   const { userInfo } = useSelector((state) => state.user)
-  const { loading, error } = useSelector((state) => state.teams)
   const dispatch = useDispatch()
   let [players, setPlayers] = useState([]);
   let [isOpen, setIsOpen] = useState(false);
@@ -18,7 +16,7 @@ const Players = ({ teamTitle, teamId }) => {
     setIsOpen(true);
     try {
       const { payload } = await dispatch(fetchTeam(teamTitle))
-      setPlayers(payload.team[0].players)
+      setPlayers(payload[0].players)
     } catch (error) {
       toastError(error.message);
     }
@@ -27,7 +25,7 @@ const Players = ({ teamTitle, teamId }) => {
   function closeModal() {
     setIsOpen(false);
   }
-
+  
   const removePlayer = async (teamId, playerId) => {
     if (userInfo?.role === "admin") {
       try {
@@ -41,8 +39,6 @@ const Players = ({ teamTitle, teamId }) => {
     } else toastError('you dont have permission')
   };
 
-  if (loading) return <Loading />
-  if (error) return toastError(error.message)
   return (
     <>
       <button className="flex justify-around items-center w-full bg-blue-500 py-3" onClick={openModal}>

@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import loadingSlice from './loadingSlice'
 import userReducer from './user/userSlice'
 import { blogSlice } from './features/blogSlice'
-import teamReducer from './team/teamSlice'
+import teamReducer from './features/team/teamSlice'
 
 const store = configureStore({
   reducer: {

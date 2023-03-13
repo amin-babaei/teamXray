@@ -1,13 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { newplayer } from "../../../services/team";
 import { toastError, toastSuccess } from "../../../helpers/Toast";
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewPlayer } from "../../../app/features/team/teamAction";
 
 const AddPlayer = ({ teamId }) => {
   let [isOpen, setIsOpen] = useState(false);
-  const {userInfo} = useSelector((state) => state.user)
+  const { userInfo } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -31,7 +31,7 @@ const AddPlayer = ({ teamId }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(userInfo?.role==="admin"){
+    if (userInfo?.role === "admin") {
       try {
         let data = new FormData();
         data.append("name", name);
@@ -41,14 +41,14 @@ const AddPlayer = ({ teamId }) => {
         data.append("instagram", instagram);
         data.append("twitter", twitter);
         data.append("image", event.target.image.files[0]);
-  
-        const { status } = await newplayer(teamId, data);
-        if (status === 201) {
-          toastSuccess("player added successfully");
-          Navigate("/admin/team");
+
+        const { meta } = await dispatch(addNewPlayer({ teamId, data }))
+        if (meta.requestStatus === "fulfilled") {
+          toastSuccess('player created !')
+          setIsOpen(false)
         }
-      } catch (ex) {
-        console.log(ex);
+      } catch (err) {
+        console.log(err.message);
       }
     }
     toastError('you dont have permission')

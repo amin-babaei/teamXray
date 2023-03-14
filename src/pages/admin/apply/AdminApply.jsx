@@ -3,23 +3,20 @@ import { Helmet } from "react-helmet-async";
 import Loading from "../../../helpers/Loading";
 import { getAllApply } from './../../../services/apply';
 import ApplyDrop from './ApplyDrop';
-import { useDispatch, useSelector } from "react-redux";
-import {loadingSpinner} from '../../../app/loadingSlice.js'
 
 const AdminApply = () => {
   const [apply, setApply] = useState([]);
-  const {loading} = useSelector((state) => state.loading)
-  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false);
   useEffect(()=>{
     const getBlogList = async() => {
-      dispatch(loadingSpinner(true));
+      setLoading(true)
       try{
         const {data} = await getAllApply();
         setApply(data.Applys);
-        dispatch(loadingSpinner(false));
+        setLoading(false)
       }catch(error){
         console.log(error)
-        dispatch(loadingSpinner(false));
+        setLoading(false)
       }
   };
   getBlogList()

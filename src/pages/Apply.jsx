@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { createApply } from "../services/apply";
 import { toastSuccess } from "../helpers/Toast";
@@ -5,24 +6,21 @@ import { applySchema } from "../helpers/validation";
 import { useNavigate } from "react-router-dom";
 import Loading from "../helpers/Loading";
 import { Helmet } from "react-helmet-async";
-import { loadingSpinner } from "../app/loadingSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const Apply = () => {
-  const {loading} = useSelector((state) => state.loading)
-  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const handleSubmit = async (values) => {
-    dispatch(loadingSpinner(true));
+    setLoading(true)
     try {
       const { status } = await createApply(values);
       if (status === 201) {
         toastSuccess("Apply sent successful");
-        dispatch(loadingSpinner(false));
+        setLoading(false)
         navigate("/");
       }
     } catch (err) {
-      dispatch(loadingSpinner(false));
+      setLoading(false)
       console.log(err);
     }
   };
@@ -63,7 +61,7 @@ const Apply = () => {
             handleSubmit(values);
           }}
         >
-          {({isValid,dirty}) => (
+          {({ isValid, dirty }) => (
 
             <Form className="mt-10">
               <Helmet>
@@ -521,7 +519,7 @@ const Apply = () => {
               <button
                 disabled={!(isValid && dirty)}
                 type="submit"
-                className={`text-black rounded-lg p-2 duration-300 font-bold block w-52 mx-auto mt-10 ${(isValid && dirty) ? 'bg-gray-200 hover:hover:opacity-80' :'bg-gray-500' }`}
+                className={`text-black rounded-lg p-2 duration-300 font-bold block w-52 mx-auto mt-10 ${(isValid && dirty) ? 'bg-gray-200 hover:hover:opacity-80' : 'bg-gray-500'}`}
               >
                 Submit
               </button>

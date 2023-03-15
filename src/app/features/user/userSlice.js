@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toastSuccess } from '../../helpers/Toast'
+import { toastSuccess } from '../../../helpers/Toast'
 import {userLogin} from './userAction'
 
 const userToken = localStorage.getItem('token')

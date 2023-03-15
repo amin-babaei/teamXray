@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux';
-import {logout} from '../../app/user/userSlice'
+import {logout} from '../../app/features/user/userSlice'
 const Navbar = () => {
     let {pathname} = useLocation();
     const { userInfo } = useSelector((state) => state.user)

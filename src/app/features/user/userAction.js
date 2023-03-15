@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit"
-import http from '../../services/httpService';
-import { toastError, toastSuccess } from './../../helpers/Toast';
+import http from '../../../services/httpService';
+import { toastError, toastSuccess } from '../../../helpers/Toast';
 import jwt_decode from 'jwt-decode';
 
 export const userLogin = createAsyncThunk(

@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Loading from "./helpers/Loading";
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, clearUser } from "./app/user/userSlice";
+import { addUser, clearUser } from "./app/features/user/userSlice";
 import { toastError } from "./helpers/Toast";
 
 const Blog = lazy(() => import("./pages/blog/Blog"));

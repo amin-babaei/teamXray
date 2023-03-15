@@ -5,7 +5,7 @@ import { loginSchema } from '../helpers/validation'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../helpers/Loading';
 import { Helmet } from 'react-helmet-async';
-import { userLogin } from './../app/user/userAction';
+import { userLogin } from './../app/features/user/userAction';
 import { useEffect } from 'react'
 
 const Login =() => {

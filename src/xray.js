@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Routes, Route, useLocation } from "react-router-dom";
 import AdminLayout from "./layout/AdminLayout";
 import MainLayout from "./layout/MainLayout";
@@ -42,7 +41,7 @@ const Xray = () => {
       }
     }
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  }, [token]);
+  }, [dispatch, token]);
 
   function ScrollToTop() {
     const { pathname } = useLocation();
@@ -57,11 +56,11 @@ const Xray = () => {
       <ScrollToTop />
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/apply" element={<Apply />} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login />} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/blogs/:title" element={<SingleBlog />} />
             <Route path="/teams" element={<Teams />} />

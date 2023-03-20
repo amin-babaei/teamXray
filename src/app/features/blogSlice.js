@@ -12,7 +12,7 @@ export const blogSlice = createApi({
       query: () => "/blogList",
       providesTags: (result = [], error, arg) => [
         "BLOG",
-        ...result?.Blogs.map(({ id }) => ({ type: "BLOG", id })),
+        ...result?.Blogs.map(({ _id }) => ({ type: "BLOG", id:_id })),
       ],
     }),
     getBlog: builder.query({
@@ -42,7 +42,7 @@ export const blogSlice = createApi({
         },
       }),
       invalidatesTags: (result, error, arg) => [
-        { type: "BLOG", id: arg.id },
+        { type: "BLOG", id: arg._id },
       ],
     }),
     deleteBlog: builder.mutation({

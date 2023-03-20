@@ -16,8 +16,10 @@ const AdminTeam = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchTeams())
-  }, [dispatch])
+    if (status === 'idle') {
+        dispatch(fetchTeams());
+    }
+  }, [dispatch, status]);
 
   const removeTeam = (teamId) => {
     if (userInfo?.role === "admin") {

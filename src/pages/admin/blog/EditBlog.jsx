@@ -3,14 +3,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
-import { useEditBlogMutation, useGetBlogQuery } from '../../../app/features/blogSlice';
+import { useEditBlogMutation } from '../../../app/features/blogSlice';
 import Loading from '../../../helpers/Loading';
 
-const EditBlog = ({ blogTitle }) => {
+const EditBlog = ({ openEdit,isOpen,close,data }) => {
   const { userInfo } = useSelector((state) => state.user)
-  const { data } = useGetBlogQuery(blogTitle);
   const [updateBlog, { isLoading: editLoading, isSuccess }] = useEditBlogMutation();
-
   const [state, setState] = useState({
     blog: {
       title: "",
@@ -20,17 +18,10 @@ const EditBlog = ({ blogTitle }) => {
     }
   });
   const { blog } = state;
-  let [isOpen, setIsOpen] = useState(false);
-  function closeModal() {
-    setIsOpen(false);
-  }
-  function openModal() {
-    setIsOpen(true);
-  }
 
   useEffect(() => {
-    setState({ ...state, blog: data?.blog[0] });
-  }, [data?.blog])
+    setState({ ...state, blog: data && data[0]});
+  }, [data])
 
   const handleChangeInput = e => {
     const { name, value } = e.target
@@ -50,23 +41,25 @@ const EditBlog = ({ blogTitle }) => {
       data.append('description', blog.description)
       data.append('body', blog.body)
       data.append('imageUrl', blog.imageUrl)
+      console.log(blog.id);
 
-      await updateBlog(JSON.stringify(data))
+      await updateBlog({id:blog._id,data}).unwrap()
     } else toastError('you dont have permission')
   }
+
   if (editLoading) return <Loading />
   if (isSuccess) {
     toastSuccess("Blog updated successfully")
   }
   return (
     <>
-      <button className="flex justify-around items-center w-full bg-yellow-500 py-3" onClick={openModal}>
+      <button className="flex justify-around items-center w-full bg-yellow-500 py-3" onClick={openEdit}>
         Edit
         <i className="fas fa-edit"></i>
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={close}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -95,7 +88,7 @@ const EditBlog = ({ blogTitle }) => {
                     <button
                       type="button"
                       className="rounded-md border fa fa-window-close bg-xred px-4 py-2 text-sm font-medium text-white hover:bg-opacity-40 outline-none"
-                      onClick={closeModal}
+                      onClick={close}
                     ></button>
                   </div>
                   <Dialog.Title

@@ -32,10 +32,10 @@ export const blogSlice = createApi({
       invalidatesTags: ["BLOG"],
     }),
     editBlog: builder.mutation({
-      query: (blog) => ({
-        url: `/blog/${blog.blogId}`,
+      query: ({ id, ...data }) => ({
+        url: `/blog/${id}`,
         method: "PUT",
-        body: blog,
+        body: data,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -59,4 +59,4 @@ export const blogSlice = createApi({
   }),
 });
 
-export const { useGetBlogsQuery, useGetBlogQuery, useGetBlogListQuery, useAddNewBlogMutation, useEditBlogMutation, useDeleteBlogMutation } = blogSlice;
+export const { useGetBlogsQuery, useGetBlogQuery, useGetBlogListQuery, useAddNewBlogMutation, useEditBlogMutation, useDeleteBlogMutation, useLazyGetBlogQuery } = blogSlice;

@@ -1,8 +1,10 @@
-# این وبسایت صرفا یک نمونه کار بوده و متعلق به xray team نمی باشد
+# xray team
 
 دراین پروژه از react js و tailwind css در سمت فرانت و از node js و express در سمت بک اند استفاده شده است.
 
 در این پروژه از twitch api برای دریافت اطلاعات live stream استفاده شده است.
+
+در قسمت live stream از تیم faze برای نمایش ui بهتر استفاده شده است
 
 در این پروژه برای مدیریت state ها و دیتا ها از redux toolkit استفاده شده است.
 
@@ -18,5 +20,5 @@ Link Website : https://xrayteam.vercel.app
 
 ## Contact ME
 
-- Email: [aminbabaei_dev@yahoo.com](mailto:aminbabaei_dev@yahoo.com)
-- Instagram: [@aminnymous](https://www.instagram.com/aminnymous)
+- Email : [aminbabaei_dev@yahoo.com](mailto:aminbabaei_dev@yahoo.com)
+- Linkedin : https://www.linkedin.com/in/amin-babaei

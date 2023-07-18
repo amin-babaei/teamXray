@@ -5,7 +5,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
-import Apply from "./pages/Apply";
+import Apply from "./pages/apply/Apply";
 import { useEffect, lazy, Suspense } from "react";
 
 import jwt_decode from "jwt-decode";

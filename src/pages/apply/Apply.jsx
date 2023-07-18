@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { createApply } from "../services/apply";
-import { toastSuccess } from "../helpers/Toast";
-import { applySchema } from "../helpers/validation";
+import { Field, Form, Formik } from "formik";
+import { createApply } from "../../services/apply";
+import { toastError, toastSuccess } from "../../helpers/Toast";
+import { applySchema } from "../../helpers/validation";
 import { useNavigate } from "react-router-dom";
-import Loading from "../helpers/Loading";
+import Loading from "../../helpers/Loading";
 import { Helmet } from "react-helmet-async";
+import LableField from './LableField';
+import { initialValues } from './values';
 
 const Apply = () => {
   const [loading, setLoading] = useState(false)
@@ -21,7 +23,7 @@ const Apply = () => {
       }
     } catch (err) {
       setLoading(false)
-      console.log(err);
+      toastError("Please try again")
     }
   };
 
@@ -33,28 +35,7 @@ const Apply = () => {
       <div className="containerr">
         {loading === true && <Loading />}
         <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            age: "",
-            phone: "",
-            discord: "",
-            email: "",
-            familiar: "",
-            current_job: "",
-            yourself: "",
-            join_us: [],
-            willAdd: "",
-            practice: "",
-            experiences: "",
-            english: "",
-            voucher: "",
-            mental: "",
-            youtube: "",
-            twitch: "",
-            instagram: "",
-            twitter: "",
-          }}
+          initialValues={initialValues}
           validationSchema={applySchema}
           validateOnMount={true}
           onSubmit={(values) => {
@@ -62,7 +43,6 @@ const Apply = () => {
           }}
         >
           {({ isValid, dirty }) => (
-
             <Form className="mt-10">
               <Helmet>
                 <meta charSet="utf-8" />
@@ -70,17 +50,8 @@ const Apply = () => {
                 <meta name="description" content="apply xray team" />
               </Helmet>
               <div className="grid gap-6 mb-6 md:grid-cols-3">
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    First name
-                  </label>
-                  <ErrorMessage
-                    name="firstName"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className='relative'>
+                  <LableField name="firstName" lable="First Name"/>
                   <Field
                     type="text"
                     id="firstName"
@@ -89,17 +60,8 @@ const Apply = () => {
                     placeholder="John"
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="lastName"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Last name
-                  </label>
-                  <ErrorMessage
-                    name="lastName"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className='relative'>
+                  <LableField name="lastName" lable="Last Name"/>
                   <Field
                     type="text"
                     id="lastName"
@@ -108,17 +70,8 @@ const Apply = () => {
                     placeholder="Doe"
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="age"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Age
-                  </label>
-                  <ErrorMessage
-                    name="age"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className='relative'>
+                  <LableField name="age" lable="Age"/>
                   <Field
                     type="number"
                     id="age"
@@ -127,17 +80,8 @@ const Apply = () => {
                     placeholder="Age"
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Phone number
-                  </label>
-                  <ErrorMessage
-                    name="phone"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className='relative'>
+                  <LableField name="phone" lable="Phone"/>
                   <Field
                     type="tel"
                     id="phone"
@@ -146,17 +90,8 @@ const Apply = () => {
                     placeholder="09331127447"
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="discord"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Discord tag or ID
-                  </label>
-                  <ErrorMessage
-                    name="discord"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className='relative'>
+                  <LableField name="discord" lable="Discord"/>
                   <Field
                     type="text"
                     id="discord"
@@ -165,17 +100,8 @@ const Apply = () => {
                     placeholder="discord tag"
                   />
                 </div>
-                <div className="mb-6">
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Email address
-                  </label>
-                  <ErrorMessage
-                    name="email"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className="mb-6 relative">
+                  <LableField name="email" lable="Email"/>
                   <Field
                     type="email"
                     id="email"
@@ -185,17 +111,8 @@ const Apply = () => {
                   />
                 </div>
               </div>
-              <div className="pb-6">
-                <label
-                  htmlFor="familiar"
-                  className="block mb-2 text-sm font-medium text-gray-300"
-                >
-                  How did you hear about us:
-                </label>
-                <ErrorMessage
-                  name="familiar"
-                  render={(msg) => <div className="text-xred">{msg}</div>}
-                />
+              <div className="pb-6 relative">
+                <LableField name="familiar" lable="How did you hear about us:"/>
                 <Field
                   type="text"
                   id="familiar"
@@ -204,17 +121,8 @@ const Apply = () => {
                   placeholder="your Answer"
                 />
               </div>
-              <div className="pb-6">
-                <label
-                  htmlFor="current_job"
-                  className="block mb-2 text-sm font-medium text-gray-300"
-                >
-                  What is your current job at the moment?
-                </label>
-                <ErrorMessage
-                  name="current_job"
-                  render={(msg) => <div className="text-xred">{msg}</div>}
-                />
+              <div className="pb-6 relative">
+                <LableField name="current_job" lable="What is your current job at the moment?"/>
                 <Field
                   type="text"
                   id="current_job"
@@ -223,17 +131,8 @@ const Apply = () => {
                   placeholder="your Answer"
                 />
               </div>
-              <div className="pb-6">
-                <label
-                  htmlFor="your_self"
-                  className="block mb-2 text-sm font-medium text-gray-300"
-                >
-                  Tell us more about yourself and your personality:
-                </label>
-                <ErrorMessage
-                  name="yourself"
-                  render={(msg) => <div className="text-xred">{msg}</div>}
-                />
+              <div className="pb-6 relative">
+                <LableField name="yourself" lable="Tell us more about yourself and your personality:"/>
                 <Field
                   as="textarea"
                   type="text"
@@ -273,17 +172,8 @@ const Apply = () => {
                 </div>
               </div>
               <div className="grid grid-cols-1 items-end gap-6 sm:grid-cols-2">
-                <div className="pb-6">
-                  <label
-                    htmlFor="willAdd"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    What will you Add to XRayTeam by joining us:
-                  </label>
-                  <ErrorMessage
-                    name="willAdd"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className="pb-6 relative">
+                  <LableField name="willAdd" lable="What will you Add to XRayTeam by joining us:"/>
                   <Field
                     as="textarea"
                     type="text"
@@ -293,18 +183,9 @@ const Apply = () => {
                     placeholder="your Answer"
                   ></Field>
                 </div>
-                <div className="pb-6">
-                  <label
-                    htmlFor="practice"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Hours that you can participate in practice per day/week (Team
-                    players only):
-                  </label>
-                  <ErrorMessage
-                    name="practice"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className="pb-6 relative">
+                  <LableField name="practice" lable="Hours that you can participate in practice per day/week (Team
+                    players only):"/>
                   <Field
                     type="text"
                     id="practice"
@@ -313,18 +194,9 @@ const Apply = () => {
                     placeholder="your Answer"
                   ></Field>
                 </div>
-                <div className="pb-6">
-                  <label
-                    htmlFor="experiences"
-                    className="block mb-2 text-sm font-medium text-gray-300"
-                  >
-                    Tell us more about your recent experiences, Social media,
-                    E-Sports activities such as tournaments, records, etc:
-                  </label>
-                  <ErrorMessage
-                    name="experiences"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className="pb-6 relative">
+                  <LableField name="experiences" lable="Tell us more about your recent experiences, Social media,
+                    E-Sports activities such as tournaments, records, etc:"/>
                   <Field
                     as="textarea"
                     type="text"
@@ -334,15 +206,9 @@ const Apply = () => {
                     placeholder="your Answer"
                   ></Field>
                 </div>
-                <div className="pb-6">
-                  <label className="block mb-2 text-sm font-medium text-gray-300">
-                    Are you able to perform with a team or stream in English
-                    language?
-                  </label>
-                  <ErrorMessage
-                    name="english"
-                    render={(msg) => <div className="text-xred">{msg}</div>}
-                  />
+                <div className="pb-6 relative">
+                  <LableField name="english" lable="Are you able to perform with a team or stream in English
+                    language?"/>
                   <div className="flex items-center">
                     <Field
                       type="radio"
@@ -377,17 +243,8 @@ const Apply = () => {
                   </div>
                 </div>
               </div>
-              <div className="pb-6">
-                <label
-                  htmlFor="voucher"
-                  className="block mb-2 text-sm font-medium text-gray-300"
-                >
-                  Can anyone in the community vouch for you?
-                </label>
-                <ErrorMessage
-                  name="voucher"
-                  render={(msg) => <div className="text-xred">{msg}</div>}
-                />
+              <div className="pb-6 relative">
+                <LableField name="voucher" lable="Can anyone in the community vouch for you?"/>
                 <Field
                   type="text"
                   id="voucher"
@@ -396,15 +253,9 @@ const Apply = () => {
                   placeholder="your Answer"
                 />
               </div>
-              <div className="pb-6">
-                <label className="block mb-2 text-sm font-medium text-gray-300 ">
-                  Are you able to control your mental situation in any case and
-                  respect your fellow colleagues in community and help them?
-                </label>
-                <ErrorMessage
-                  name="mental"
-                  render={(msg) => <div className="text-xred">{msg}</div>}
-                />
+              <div className="pb-6 relative">
+                <LableField name="mental" lable="Are you able to control your mental situation in any case and
+                  respect your fellow colleagues in community and help them?"/>
                 <div className="flex items-center">
                   <Field
                     type="radio"

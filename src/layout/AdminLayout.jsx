@@ -61,7 +61,7 @@ const AdminLayout = () => {
               </div>
             </div>
           </nav>
-          <section className="w-full bg-black">
+          <section className="w-full bg-black min-h-screen">
             <Outlet />
           </section>
         </div>

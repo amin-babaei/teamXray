@@ -23,8 +23,8 @@ const SingleBlog = () => {
             <BreadCrumb title={post.title}/>
           </header>
           <img src={`${process.env.REACT_APP_BASE_URL}/${post.imageUrl}`} alt="" className='w-full h-60 sm:h-[31rem]'/>
-          <p className='text-lg leading-10 text-justify my-10'>{post.body}</p>
-          <p className='my-5'>Published : {new Date(post.createdAt).toLocaleDateString()}</p>
+          <div className='prose max-w-none prose-xl prose-headings:text-white prose-headings:uppercase prose-h1:md:text-3xl prose-h1:text-2xl prose-h2:text-2xl prose-p:text-gray-300 prose-p:text-lg prose-p:leading-10 prose-a:text-red-800 prose-a:font-main prose-li:text-white my-10' dangerouslySetInnerHTML={{ __html: post.body }}/>
+          <p className='my-5 italic text-gray-300'>Published at: {new Date(post.createdAt).toLocaleDateString()}</p>
           <CopyUrl/>
         </main>
       ))}

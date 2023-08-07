@@ -1,23 +1,15 @@
-import AddBlog from './AddBlog';
 import DeleteBlog from './DeleteBlog';
-import EditBlog from './EditBlog';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import Loading from '../../../helpers/Loading';
 import { Helmet } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
-import { useDeleteBlogMutation, useGetBlogListQuery, useLazyGetBlogQuery } from '../../../app/features/blogSlice';
-import { useState } from 'react';
+import { useDeleteBlogMutation, useGetBlogListQuery } from '../../../app/features/blogSlice';
+import { Link } from 'react-router-dom';
 
 const AdminBlog = () => {
   const { userInfo } = useSelector((state) => state.user)
   const { data, isLoading } = useGetBlogListQuery()
   const [deleteBlog, { isLoading: delLoading, isSuccess }] = useDeleteBlogMutation();
-  const [blogData, setBlogData] = useState([])
-  const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [getBlog,{isFetching}] = useLazyGetBlogQuery(title)
-
-  const closeModal = () => setIsOpen(false);
 
   const deletedBlog = async (blogId) => {
     if (userInfo?.role === "admin") {
@@ -26,14 +18,7 @@ const AdminBlog = () => {
     } else toastError('you dont have permission')
   };
 
-  const openEditBlog = async (title) => {
-    const {data} = await getBlog(title)
-    setBlogData(data)
-    setIsOpen(true)
-    setTitle(data)
-  };
-  
-  if (delLoading || isFetching) return <Loading />
+  if (delLoading) return <Loading />
   if (isSuccess) {
     toastSuccess("Blog deleted successfully");
   }
@@ -43,7 +28,11 @@ const AdminBlog = () => {
       <Helmet>
         <title>Admin-Blogs</title>
       </Helmet>
-      <AddBlog />
+      <Link to={`/admin/blog/create`}>
+        <button type="button" className="rounded-md bg-xred px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 outline-none">
+          Add blog +
+        </button>
+      </Link>
       <section className='my-5'>
         {isLoading && <Loading />}
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -51,11 +40,12 @@ const AdminBlog = () => {
             <div key={blog._id}>
               <img src={`${process.env.REACT_APP_BASE_URL}/${blog.imageUrl}`} alt={blog.title} className="h-64" />
               <div className='flex justify-between'>
-                <EditBlog blogTitle={blog.title}
-                  blogId={blog._id} openEdit={() => openEditBlog(blog.title)}
-                  data={blogData.blog}
-                  isOpen={isOpen}
-                  close={closeModal} />
+                <Link to={`/admin/blog/${blog.title}`} className='flex-grow'>
+                  <button className="flex justify-around items-center w-full bg-yellow-500 py-3">
+                    Edit
+                    <i className="fas fa-edit"></i>
+                  </button>
+                </Link>
                 <DeleteBlog deleted={() => deletedBlog(blog._id)} />
               </div>
             </div>

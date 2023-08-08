@@ -11,52 +11,50 @@ const AdminLayout = () => {
           <nav className="w-full bg-layout fixed bottom-0 sm:relative sm:w-auto sm:p-4">
             <div className="shadoww md:h-full z-10 w-full md:w-48 content-center">
               <div className="md:bg-transparent md:w-48  md:left-0 md:top-4 bg-mobileNav content-center md:content-start text-left justify-between">
-                <h1 className="hidden text-center font-main py-3 border-b-2 border-white mb-10 sm:block">xrayteam</h1>
-                <ul className="flex justify-around md:flex-col text-center md:text-left text-white">
-                  <li className="rounded-lg mb-5 hover:shadow-2xl">
-                    <NavLink
-                      className={({ isActive }) =>
-                      `${isActive && 'bg-black'} flex items-center gap-4 text-sm font-light px-4 py-3 rounded-lg bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-lg`
-                      }
-                      to="/admin/blog"
-                      aria-current="page"
-                    >
+                <h1 className="hidden text-center font-main py-3 border-b-2 border-white mb-10 sm:block font-bold">xrayteam</h1>
+                <ul className="flex justify-around md:flex-col text-center md:text-left text-white font-semibold">
+                  <NavLink
+                    className={({ isActive }) =>
+                    `${isActive && 'bg-red-600'} text-sm font-light px-4 py-3 md:rounded-lg text-white shadow-lg flex-grow hover:shadow-xl md:mb-5`
+                    }
+                    to="/admin/blog"
+                    aria-current="page"
+                  >
+                    <li className="md:rounded-lg font-medium">
                       Blogs
-                    </NavLink>
-                  </li>
-                  <li className="rounded-lg mb-5 hover:shadow-2xl">
+                    </li>
+                  </NavLink>
                   <NavLink
-                      className={({ isActive }) =>
-                      `${isActive && 'bg-black'}  flex items-center gap-4 text-sm font-light px-4 py-3 rounded-lg bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-lg`
-                      }
-                      to="/admin/team"
-                      aria-current="page"
-                    >
+                    className={({ isActive }) =>
+                    `${isActive && 'bg-red-600'} text-sm font-light px-4 py-3 md:rounded-lg text-white shadow-lg flex-grow hover:shadow-xl md:mb-5`
+                    }
+                    to="/admin/team"
+                    aria-current="page"
+                  >
+                    <li className="md:rounded-lg font-medium">
                       teams
+                    </li>
                     </NavLink>
-                  </li>
-                  <li className="rounded-lg mb-5 hover:shadow-2xl">
                   <NavLink
-                      className={({ isActive }) =>
-                      `${isActive && 'bg-black'} flex items-center gap-4 text-sm font-light px-4 py-3 rounded-lg bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-lg`
-                      }
-                      to="/admin/apply"
-                      aria-current="page"
-                    >
+                    className={({ isActive }) =>
+                    `${isActive && 'bg-red-700'} text-sm font-light px-4 py-3 md:rounded-lg text-white shadow-lg flex-grow hover:shadow-xl md:mb-5`
+                    }
+                    to="/admin/apply"
+                    aria-current="page"
+                  >
+                    <li className="md:rounded-lg font-medium">
                       apply
-                    </NavLink>
-                  </li>
-                  <li className="rounded-lg mb-5 hover:shadow-2xl">
+                    </li>
+                  </NavLink>
                   <NavLink
-                      className={({ isActive }) =>
-                      `${isActive && 'bg-black'} flex items-center gap-4 text-sm font-light px-4 py-3 rounded-lg bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-lg`
-                      }
-                      to="/"
-                      aria-current="page"
-                    >
+                    className="text-sm font-light px-4 py-3 rounded-lg text-white shadow-lg flex-grow hover:shadow-xl md:mb-5"
+                    to="/"
+                    aria-current="page"
+                  >
+                    <li className="md:rounded-lg hover:shadow-2xl font-medium">
                       Back to Home
-                    </NavLink>
-                  </li>
+                    </li>
+                  </NavLink>
                 </ul>
               </div>
             </div>

@@ -10,6 +10,7 @@ import BlogForm from "./pages/admin/blog/BlogForm";
 import { useEffect, lazy, Suspense } from "react";
 
 import Loading from "./helpers/Loading";
+import { SecureRoute } from "./helpers/SecureRoute";
 
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const SingleBlog = lazy(() => import("./pages/blog/SingleBlog"));
@@ -45,7 +46,7 @@ const Xray = () => {
             <Route path="/teams/:title" element={<SingleTeam />} />
           </Route>
           {/* admin */}
-          
+          <Route element={<SecureRoute/>}>
             <Route path="/admin" element={<AdminLayout />}>
               <Route
                 index
@@ -61,7 +62,7 @@ const Xray = () => {
               <Route path="/admin/team" element={<AdminTeam />} />
               <Route path="/admin/apply" element={<AdminApply />} />
             </Route>
-          
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

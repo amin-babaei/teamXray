@@ -9,12 +9,7 @@ import Apply from "./pages/apply/Apply";
 import BlogForm from "./pages/admin/blog/BlogForm";
 import { useEffect, lazy, Suspense } from "react";
 
-import jwt_decode from "jwt-decode";
-import axios from "axios";
 import Loading from "./helpers/Loading";
-import { useDispatch, useSelector } from 'react-redux';
-import { addUser, clearUser } from "./app/features/user/userSlice";
-import { toastError } from "./helpers/Toast";
 
 const Blog = lazy(() => import("./pages/blog/Blog"));
 const SingleBlog = lazy(() => import("./pages/blog/SingleBlog"));
@@ -25,25 +20,7 @@ const AdminTeam = lazy(() => import("./pages/admin/team/AdminTeam"));
 const AdminApply = lazy(() => import("./pages/admin/apply/AdminApply"));
 
 const Xray = () => {
-  const { userInfo } = useSelector((state) => state.user)
-  const dispatch = useDispatch()
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    if (token) {
-      const decoded = jwt_decode(token);
-      const dateNow = new Date() / 1000;
-      if (decoded.exp < dateNow) {
-        localStorage.removeItem("token");
-        dispatch(clearUser());
-        toastError('your time has ended !')
-      } else {
-        dispatch(addUser(decoded.user));
-      }
-    }
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  }, [dispatch, token]);
-
+  
   function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
@@ -68,7 +45,7 @@ const Xray = () => {
             <Route path="/teams/:title" element={<SingleTeam />} />
           </Route>
           {/* admin */}
-          {userInfo?.isAdmin && (
+          
             <Route path="/admin" element={<AdminLayout />}>
               <Route
                 index
@@ -84,7 +61,7 @@ const Xray = () => {
               <Route path="/admin/team" element={<AdminTeam />} />
               <Route path="/admin/apply" element={<AdminApply />} />
             </Route>
-          )}
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

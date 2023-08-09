@@ -1,13 +1,23 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux';
-import {logout} from '../../app/features/user/userSlice'
+import { useEffect } from 'react';
+import { userLogout, userProfile } from '../../app/features/user/userAction';
+
 const Navbar = () => {
-    let {pathname} = useLocation();
-    const { userInfo } = useSelector((state) => state.user)
+    const { loading,userInfo } = useSelector((state) => state.user)
+    let { pathname } = useLocation();
     const dispatch = useDispatch()
 
+    const handleLogout = () => {
+        dispatch(userLogout());
+      };
+    
+    useEffect(() => {
+        dispatch(userProfile())
+    },[dispatch])
+    
   return (
-    <nav className={`${pathname !=="/" ? 'bg-layout' : 'absolute top-0 w-full'} font-main shadow-lg shadow-black backdrop-blur-md py-3`}>
+    <nav className={`${pathname !=="/" ? 'bg-layout' : 'absolute top-0 w-full'} ${loading ? 'blur-sm' :' blur-0'} font-main shadow-lg shadow-black backdrop-blur-md py-3`}>
         <div className="containerr flex justify-between items-center">
             <Link to={"/"}>
                 <img src="/images/logo.svg" alt="" className='w-20'/>
@@ -62,7 +72,7 @@ const Navbar = () => {
                             </button>
                         </Link>
                         <button className=' bg-white text-black rounded-lg p-2 hover:opacity-60 transition-all ml-1'
-                        onClick={() => dispatch(logout())}
+                        onClick={handleLogout}
                         >
                         <i className='fas fa-sign-out-alt'></i>
                         </button>

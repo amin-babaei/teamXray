@@ -29,8 +29,8 @@ const Login =() => {
         <meta name="description" content="login page in xray team" />
       </Helmet>
     <div className="containerr py-14">
+        {loading && <Loading/>}
         <section className="flex justify-center items-center ">
-        {loading===true && <Loading/>}
           <Formik
           initialValues={{
             email: '',

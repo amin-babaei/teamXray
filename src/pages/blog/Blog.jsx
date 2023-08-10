@@ -24,6 +24,7 @@ const Blog = () => {
         <meta name="description" content="blogs xray team" />
       </Helmet>
       <div className="containerr py-14">
+        {isLoading && <Loading/>}
         <div className="mb-8 relative">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3">
           <span className="fas fa-search cursor-pointer"></span>
@@ -37,7 +38,6 @@ const Blog = () => {
             onChange={blogSearch}
           />
         </div>
-        {isLoading && <Loading/>}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {Object.values(query.text).length < 1 ? data?.Blogs.map((blog) => (
             <BlogItem post={blog} key={blog._id} />

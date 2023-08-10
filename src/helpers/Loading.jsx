@@ -1,14 +1,11 @@
-import { Fragment } from 'react'
-import { Oval } from  'react-loader-spinner'
+import { MagnifyingGlass } from 'react-loader-spinner';
 
 const Loading = () => {
-    return (
-        <Fragment>
-        <div className='fixed w-full min-h-screen text-center flex justify-center items-center bg-black z-50 top-0 left-0'>
-          <Oval color='#fff' width={100} secondaryColor="#fff"/>
-        </div>
-        </Fragment>
-    )
+  return (
+    <div className='fixed w-full min-h-screen text-center flex flex-col justify-center items-center bg-black z-50 top-0 left-0'>
+      <MagnifyingGlass height="100" width="100" wrapperClass="MagnifyingGlass-wrapper" glassColor='#fff' color='#e15b64' />
+    </div>
+  )
 }
 
 export default Loading

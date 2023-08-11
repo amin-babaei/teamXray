@@ -23,9 +23,7 @@ export const blogSlice = createApi({
       query: (data) => ({
         url: "/blog",
         method: "POST",
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem("token")}`
-        },
+        credentials:"include",
         body: data,
       }),
       invalidatesTags: ["BLOG"],
@@ -35,10 +33,7 @@ export const blogSlice = createApi({
         url: `/blog/${id}`,
         method: "PUT",
         body: data,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem("token")}`
-        },
+        credentials:"include"
       }),
       invalidatesTags: (result, error, arg) => [
         { type: "BLOG", id: arg._id },
@@ -48,10 +43,7 @@ export const blogSlice = createApi({
       query: (blogId) => ({
         url: `/blog/${blogId}`,
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem("token")}`
-        },
+        credentials:"include"
       }),
       invalidatesTags: ['BLOG'],
     }),

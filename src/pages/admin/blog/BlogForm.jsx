@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import { useAddNewBlogMutation, useEditBlogMutation, useGetBlogQuery } from '../../../app/features/blogSlice';
 import Loading from '../../../helpers/Loading';
@@ -7,7 +6,6 @@ import { useLocation, useParams } from 'react-router-dom';
 import Editor from './Editor';
 
 const BlogForm = () => {
-  const { userInfo } = useSelector((state) => state.user);
   const { title } = useParams();
   const { pathname } = useLocation();
   const { data, isLoading: blogLoading } = useGetBlogQuery(title, { skip: !pathname.includes(title)});
@@ -58,22 +56,21 @@ const BlogForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (userInfo?.role === "admin") {
-      const { previewImageUrl, ...blogData } = blog;
+    const { previewImageUrl, ...blogData } = blog;
 
-      let formData = new FormData();
-      formData.append('title', blogData.title.split(' ').join('-'));
-      formData.append('description', blogData.description);
-      formData.append('body', blogData.body);
-      formData.append('imageUrl', blogData.imageUrl);
-
+    let formData = new FormData();
+    formData.append('title', blogData.title.split(' ').join('-'));
+    formData.append('description', blogData.description);
+    formData.append('body', blogData.body);
+    formData.append('imageUrl', blogData.imageUrl);
+    try {
       if (pathname === '/admin/blog/create') {
         addNewBlog(formData);
       } else {
         await updateBlog({ id: data.blog[0]._id, ...blogData, imageUrl: formData.get('imageUrl') }).unwrap();
       }
-    } else {
-      toastError('You don\'t have permission.');
+    } catch (error) {
+      toastError(error?.data?.message)
     }
   };
 

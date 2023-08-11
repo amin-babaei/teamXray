@@ -9,13 +9,13 @@ export const userProfile = createAsyncThunk(
         const { data }  = await http.get(`/api/profile`)
         return data.user
       }catch (error) {
-        console.log(error)
+        throw error
       }
     }
   )
 export const userLogin = createAsyncThunk(
     'user/login',
-    async ({ email, password }, { rejectWithValue }) => {
+    async ({ email, password }) => {
       try {
         const { data,status } = await http.post(`${process.env.REACT_APP_BASE_URL}/api/login`,{ email, password },)
         if(status === 200){
@@ -23,12 +23,7 @@ export const userLogin = createAsyncThunk(
             return data.user
         }
       }catch (error) {
-        if (error.response && error.response.data.message) {
-            toastError('incorrect email or password')
-          return rejectWithValue(error.response.data.message)
-        } else {
-          return rejectWithValue(error.message)
-        }
+        toastError(error?.response?.data?.message)
       }
     }
   )

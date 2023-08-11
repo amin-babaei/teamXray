@@ -2,20 +2,19 @@ import DeleteBlog from './DeleteBlog';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import Loading from '../../../helpers/Loading';
 import { Helmet } from 'react-helmet-async';
-import { useSelector } from 'react-redux';
 import { useDeleteBlogMutation, useGetBlogListQuery } from '../../../app/features/blogSlice';
 import { Link } from 'react-router-dom';
 
 const AdminBlog = () => {
-  const { userInfo } = useSelector((state) => state.user)
   const { data, isLoading } = useGetBlogListQuery()
   const [deleteBlog, { isLoading: delLoading, isSuccess }] = useDeleteBlogMutation();
 
   const deletedBlog = async (blogId) => {
-    if (userInfo?.role === "admin") {
+    try {
       await deleteBlog(blogId)
-
-    } else toastError('you dont have permission')
+    } catch (error) {
+      toastError(error?.message)
+    }
   };
 
   if (delLoading) return <Loading />

@@ -19,7 +19,7 @@ const userSlice = createSlice({
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.userInfo = payload
-      state.success = payload.success
+      state.success = payload
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false

@@ -17,6 +17,7 @@ This project utilized a front-end built with React.js and Tailwind CSS, and a ba
 
 ## 🚀 Features
 - Login user account
+- Handle auth user with access and refresh token
 - Show live streamers on the team.
 - Search Blog
 - Each team has multiple players

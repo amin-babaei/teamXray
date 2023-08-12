@@ -1,17 +1,17 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { addNewPlayer, addNewTeam, fetchTeam, fetchTeams, removedPlayer, removedTeam } from './teamAction';
+import { addNewTeam, fetchTeam, fetchTeams, removedTeam, updateTeam } from './teamAction';
 
-const teamsAdaptor = createEntityAdapter({
+const teamsAdapter = createEntityAdapter({
   selectId: team => team?._id
 })
-const playerAdaptor = createEntityAdapter({
+const playerAdapter = createEntityAdapter({
    selectId: players=> players?._id
 })
 
-const initialState = teamsAdaptor.getInitialState({
+const initialState = teamsAdapter.getInitialState({
   status: 'idle',
   error: null,
-  player:playerAdaptor.getInitialState({
+  player:playerAdapter.getInitialState({
     status: 'idle',
     error: null,
   })
@@ -20,83 +20,74 @@ const initialState = teamsAdaptor.getInitialState({
 const teamSlice = createSlice({
   name: 'teams',
   initialState,
-  extraReducers: {
-    [fetchTeams.fulfilled]: (state, action) => {
-      teamsAdaptor.upsertMany(state, action.payload)
-      state.status = 'completed'
-    },
-    [fetchTeams.pending]: (state) => {
-      state.status = "loading"
-      state.error = null
-    },
-    [fetchTeams.rejected]: (state, action) => {
-      state.status = "failed"
-      state.error = action.error.message
-    },
-    [fetchTeam.fulfilled]: (state, action) => {
-      playerAdaptor.setAll(state.player, action.payload)
-      state.player.status = 'completed'
-    },
-    [fetchTeam.pending]: (state) => {
-      state.player.status = "loading"
-      state.player.error = null
-    },
-    [fetchTeam.rejected]: (state, action) => {
-      state.player.status = "failed"
-      state.player.error = action.error.message
-    },
-    [removedTeam.fulfilled]: (state, action) => {
-      teamsAdaptor.removeOne(state,action.payload)
-      state.status = "completed"
-    },
-    [removedTeam.pending]: (state, action) => {
-      state.status = "loading"
-      state.error = null
-    },
-    [removedTeam.rejected]: (state, action) => {
-      state.status = "faild"
-      state.error = action.error.message
-    },
-    [addNewTeam.fulfilled]: (state, action) => {
-      teamsAdaptor.addOne(state,action.payload.team)
-      state.status = "completed"
-    },
-    [addNewTeam.pending]: (state, action) => {
-      state.status = "loading"
-      state.error = null
-    },
-    [addNewTeam.rejected]: (state, action) => {
-      state.status = "faild"
-      state.error = action.error.message
-    },
-    [removedPlayer.fulfilled]: (state, action) => {
-      playerAdaptor.removeOne(state,action.payload)
-      state.player.status = "completed"
-    },
-    [removedPlayer.pending]: (state, action) => {
-      state.player.status = "loading"
-    },
-    [removedPlayer.rejected]: (state, action) => {
-      state.player.status = "faild"
-      state.error = action.error.message
-    },
-    [addNewPlayer.fulfilled]: (state, action) => {
-      playerAdaptor.addOne(state,action.payload)
-      state.player.status = "completed"
-    },
-    [addNewPlayer.pending]: (state, action) => {
-      state.player.status = "loading"
-      state.player.error = null
-    },
-    [addNewPlayer.rejected]: (state, action) => {
-      state.player.status = "failed"
-      state.player.error = action.error.message
-    },
-  }
-})
-export const { selectAll: selectAllTeams} = teamsAdaptor.getSelectors(state => state.teams)
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTeams.fulfilled, (state, action) => {
+        teamsAdapter.upsertMany(state, action.payload);
+        state.status = 'completed';
+      })
+      .addCase(fetchTeams.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchTeams.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(fetchTeam.fulfilled, (state, action) => {
+        playerAdapter.setAll(state.player, action.payload);
+        state.player.status = 'completed';
+      })
+      .addCase(fetchTeam.pending, (state) => {
+        state.player.status = 'loading';
+        state.player.error = null;
+      })
+      .addCase(fetchTeam.rejected, (state, action) => {
+        state.player.status = 'failed';
+        state.player.error = action.error.message;
+      })
+      .addCase(removedTeam.fulfilled, (state, action) => {
+        teamsAdapter.removeOne(state, action.payload);
+        state.status = 'completed';
+      })
+      .addCase(removedTeam.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(removedTeam.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(addNewTeam.fulfilled, (state, action) => {
+        teamsAdapter.addOne(state, action.payload);
+        state.status = 'completed';
+      })
+      .addCase(addNewTeam.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(addNewTeam.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(updateTeam.fulfilled, (state, action) => {
+        teamsAdapter.upsertOne(state, action.payload);
+        state.status = 'completed';
+      })
+      .addCase(updateTeam.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(updateTeam.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
+});
+export const { selectAll: selectAllTeams} = teamsAdapter.getSelectors(state => state.teams)
 
-export const selectPlayer = playerAdaptor.getSelectors(
+export const selectPlayer = playerAdapter.getSelectors(
   (state) => state.teams.player
 )
 export default teamSlice.reducer

@@ -14,8 +14,7 @@ const DeleteTeam=({deleted}) => {
 
   return (
     <>
-      
-        <button className="flex justify-around items-center w-full bg-red-500 py-3" onClick={openModal}>
+        <button className="flex flex-grow justify-around items-center bg-red-500 py-3" onClick={openModal}>
           Delete
           <i className="fas fa-trash"></i>
         </button>

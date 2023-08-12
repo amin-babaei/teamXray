@@ -36,6 +36,6 @@ const http = {
     post: app.post,
     put: app.put,
     delete: app.delete,
-    create: app.create
+    patch: app.patch
 };
 export default http

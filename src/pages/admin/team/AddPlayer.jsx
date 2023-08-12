@@ -1,64 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import { toastError, toastSuccess } from "../../../helpers/Toast";
-import { useDispatch, useSelector } from "react-redux";
-import { addNewPlayer } from "../../../app/features/team/teamAction";
+import { Fragment, memo, useState } from "react";
 
-const AddPlayer = ({ teamId }) => {
+const AddPlayer = memo(({ player, changeInput, addPlayer, deletePlayer, submittedPlayer }) => {
+  const { playerName, game, youtube, instagram, twitch, twitter } = player;
   let [isOpen, setIsOpen] = useState(false);
-  const { userInfo } = useSelector((state) => state.user)
-  const dispatch = useDispatch()
+
   const closeModal = () => {
     setIsOpen(false);
   };
   const openModal = () => {
     setIsOpen(true);
   };
-  const initialState = {
-    name: "",
-    game: "",
-    youtube: "",
-    twitch: "",
-    instagram: "",
-    twitter: "",
-  };
-  const [player, setPlayer] = useState(initialState);
-  const { name, game, youtube, instagram, twitch, twitter } = player;
 
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setPlayer({ ...player, [name]: value });
-  };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (userInfo?.role === "admin") {
-      try {
-        let data = new FormData();
-        data.append("name", name);
-        data.append("game", game);
-        data.append("youtube", youtube);
-        data.append("twitch", twitch);
-        data.append("instagram", instagram);
-        data.append("twitter", twitter);
-        data.append("image", event.target.image.files[0]);
-
-        const { meta } = await dispatch(addNewPlayer({ teamId, data }))
-        if (meta.requestStatus === "fulfilled") {
-          toastSuccess('player created !')
-          setIsOpen(false)
-        }
-      } catch (err) {
-        console.log(err.message);
-      }
-    }
-    toastError('you dont have permission')
-  };
   return (
     <>
       <button
         type="button"
         onClick={openModal}
-        className="rounded-md bg-xred px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 outline-none"
+        className="rounded-md bg-xred px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 outline-none mt-5 mx-auto"
       >
         Add player +
       </button>
@@ -88,7 +47,7 @@ const AddPlayer = ({ teamId }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full h-[40rem] max-w-lg transform overflow-hidden rounded-2xl bg-black p-6 text-left align-middle shadow-xl shadow-xred transition-all">
+                <Dialog.Panel className="w-full h-[40rem] max-w-lg transform overflow-hidden rounded-2xl bg-black p-6 text-left align-middle shadow-lg shadow-xred transition-all">
                   <div className="mb-4">
                     <button
                       type="button"
@@ -104,59 +63,59 @@ const AddPlayer = ({ teamId }) => {
                   </Dialog.Title>
 
                   <form
-                    className="flex flex-col my-5 justify-between bg-black text-white"
-                    onSubmit={handleSubmit}
+                    className="flex flex-col my-5 justify-between bg-black text-white gap-5"
+                  // onSubmit={handleSubmit}
                   >
                     <input
                       type="text"
-                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm my-2"
+                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="name"
-                      name="name"
-                      value={name}
-                      onChange={handleChangeInput}
+                      name="playerName"
+                      value={playerName}
+                      onChange={changeInput}
                     />
                     <input
                       type="text"
-                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm my-2"
+                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="game"
                       name="game"
                       value={game}
-                      onChange={handleChangeInput}
+                      onChange={changeInput}
                     />
                     <input
                       type="text"
-                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm my-2"
+                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="youtube"
                       name="youtube"
                       value={youtube}
-                      onChange={handleChangeInput}
+                      onChange={changeInput}
                     />
                     <input
                       type="text"
-                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm my-2"
+                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="twitch"
                       name="twitch"
                       value={twitch}
-                      onChange={handleChangeInput}
+                      onChange={changeInput}
                     />
                     <input
                       type="text"
-                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm my-2"
+                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="instagram"
                       name="instagram"
                       value={instagram}
-                      onChange={handleChangeInput}
+                      onChange={changeInput}
                     />
                     <input
                       type="text"
-                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm my-2"
+                      className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="twitter"
                       name="twitter"
                       value={twitter}
-                      onChange={handleChangeInput}
+                      onChange={changeInput}
                     />
-                    <input type="file" name="image" className="mt-2" />
-                    <button className="btn my-5">submit</button>
+                    <input type="file" name="image" className='text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm'/>
+                    <button type="button" className="btn font-bold" onClick={addPlayer}>Add player</button>
                   </form>
                 </Dialog.Panel>
               </Transition.Child>
@@ -164,8 +123,16 @@ const AddPlayer = ({ teamId }) => {
           </div>
         </Dialog>
       </Transition>
+      {submittedPlayer?.map((player,index) => (
+        <div key={player.playerName || player.name} className="flex items-center justify-between px-2 my-3 rounded shadow-md shadow-xred w-2/3 md:w-1/3 mx-auto">
+          <h3>{player.playerName || player.name}</h3>
+          <button className="flex justify-around items-center text-red-500 py-3" onClick={() => deletePlayer(index)}>
+            <i className="fas fa-trash"></i>
+          </button>
+        </div>
+      ))}
     </>
   );
-};
+});
 
 export default AddPlayer;

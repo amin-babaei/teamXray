@@ -2,13 +2,13 @@ import {
   createAsyncThunk
 } from "@reduxjs/toolkit"
 import {
-  deletePlayer,
   deleteTeam,
+  editTeam,
   getAllTeams,
   getTeam,
   newTeam,
-  newplayer
 } from '../../../services/team';
+import { toastError } from "../../../helpers/Toast";
 
 export const fetchTeams = createAsyncThunk(
   'fetch/teams', async () => {
@@ -16,7 +16,7 @@ export const fetchTeams = createAsyncThunk(
       const { data } = await getAllTeams();
       return data
     } catch (error) {
-      console.log(error)
+      toastError(error?.response?.data?.message)
     }
   }
 )
@@ -26,36 +26,39 @@ export const fetchTeam = createAsyncThunk(
       const { data } = await getTeam(title);
       return data
     } catch (error) {
-      console.log(error)
+      toastError(error?.response?.data?.message)
     }
   }
 )
 export const removedTeam = createAsyncThunk(
   "/teams/deleteTeam",
   async (teamId) => {
-    await deleteTeam(teamId);
-    return teamId;
+    try {
+      await deleteTeam(teamId);
+    } catch (error) {
+      toastError(error?.response?.data?.message)
+    }
   }
 );
 export const addNewTeam = createAsyncThunk(
-  "/teams/addNewTeam",
-  async (team) => {
-    const { data } = await newTeam(team);
-    return data;
+  '/teams/addNewTeam',
+   async (team, { rejectWithValue }) => {
+    try {
+      const response = await newTeam(team);
+      return response.data;
+    } catch (error) {
+      toastError(error?.response?.data?.message)
+    return rejectWithValue(error?.response?.data);
   }
-);
-export const removedPlayer = createAsyncThunk(
-  "/teams/deletePlayer",
-  async (params) => {
-    const { teamId, playerId } = params
-    await deletePlayer(teamId, playerId)
+});
+export const updateTeam = createAsyncThunk(
+  '/teams/updateTeam',
+   async ({ id, team }, { rejectWithValue }) => {
+    try {
+      const response = await editTeam(id, team);
+      return response.data;
+    } catch (error) {
+      toastError(error?.response?.data?.message)
+      return rejectWithValue(error?.response?.data);
   }
-);
-export const addNewPlayer = createAsyncThunk(
-  "/teams/addNewPlayer",
-  async (params) => {
-    const { teamId, player } = params
-    const { data } = await newplayer(teamId, player)
-    return data
-  }
-)
+});

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { toastError, toastSuccess } from '../../../helpers/Toast';
 import { useAddNewBlogMutation, useEditBlogMutation, useGetBlogQuery } from '../../../app/features/blogSlice';
 import Loading from '../../../helpers/Loading';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Editor from './Editor';
 
 const BlogForm = () => {
@@ -96,35 +96,40 @@ const BlogForm = () => {
   };
 
   return (
-    <form className="flex flex-col mb-5 mt-10 justify-between bg-black text-white px-5">
-      <input
-        type="text"
-        placeholder="Title"
-        name="title"
-        value={blog.title}
-        onChange={handleChangeInput}
-        className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred font-bold border-none outline-none rounded-md w-full p-4 text-sm mb-5 sm:w-2/3 sm:mx-auto"
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        name="description"
-        value={blog.description}
-        onChange={handleChangeInput}
-        className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred font-bold border-none outline-none rounded-md w-full p-4 text-sm mb-5 sm:w-2/3 sm:mx-auto"
-      />
-      <Editor body={blog.body} BodyChange={handleBodyChange} />
-      <input
-        type="file"
-        name="imageUrl"
-        onChange={handleChangeFile}
-        className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm mb-5 sm:w-2/3 sm:mx-auto"
-      />
-      {renderPreviewImage()}
-      <button className="btn mt-5 uppercase font-bold w-1/4 mx-auto" onClick={handleSubmit}>
-        Submit
-      </button>
-    </form>
+    <>
+      <Link to='/admin/blog'>
+          <button className="fas fa-arrow-left w-10 h-10 rounded transition-colors duration-300 text-white text-lg ml-5 sm:ml-20 mt-10 shadow-md shadow-xred hover:bg-xred"></button>
+      </Link>
+      <form className="flex flex-col mb-5 mt-10 justify-between bg-black text-white px-5">
+        <input
+          type="text"
+          placeholder="Title"
+          name="title"
+          value={blog.title}
+          onChange={handleChangeInput}
+          className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred font-bold border-none outline-none rounded-md w-full p-4 text-sm mb-5 sm:w-2/3 sm:mx-auto"
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          name="description"
+          value={blog.description}
+          onChange={handleChangeInput}
+          className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred font-bold border-none outline-none rounded-md w-full p-4 text-sm mb-5 sm:w-2/3 sm:mx-auto"
+        />
+        <Editor body={blog.body} BodyChange={handleBodyChange} />
+        <input
+          type="file"
+          name="imageUrl"
+          onChange={handleChangeFile}
+          className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-2 text-sm mb-5 sm:w-2/3 sm:mx-auto"
+        />
+        {renderPreviewImage()}
+        <button className="btn mt-5 uppercase font-bold w-1/4 mx-auto" onClick={handleSubmit}>
+          Submit
+        </button>
+      </form>
+    </>
   );
 };
 

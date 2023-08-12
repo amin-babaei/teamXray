@@ -17,7 +17,7 @@ const Navbar = () => {
     },[dispatch])
     
   return (
-    <nav className={`${pathname !=="/" ? 'bg-layout' : 'absolute top-0 w-full'} ${loading ? 'blur-sm' :' blur-0'} font-main shadow-lg shadow-black backdrop-blur-md py-3`}>
+    <nav className={`${pathname !=="/" ? 'bg-layout' : 'absolute top-0 w-full'} font-main shadow-lg shadow-black backdrop-blur-md py-3`}>
         <div className="containerr flex justify-between items-center">
             <Link to={"/"}>
                 <img src="/images/logo.svg" alt="" className='w-20'/>
@@ -59,7 +59,7 @@ const Navbar = () => {
                     </NavLink>
                 </li>
             </ul>
-            <div>
+            <div className={`${loading ? 'blur-sm' :' blur-0'}`}>
                 {!userInfo ? (
                 <Link to="/login">
                     <button className=' bg-white text-black rounded-lg p-2 hover:opacity-60 transition-all'>signup</button>

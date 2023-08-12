@@ -7,16 +7,15 @@ import { Link } from 'react-router-dom';
 
 const AdminBlog = () => {
   const { data, isLoading } = useGetBlogListQuery()
-  const [deleteBlog, { isLoading: delLoading, isSuccess }] = useDeleteBlogMutation();
+  const [deleteBlog, { isLoading: delLoading, isSuccess, error }] = useDeleteBlogMutation();
 
   const deletedBlog = async (blogId) => {
-    try {
-      await deleteBlog(blogId)
-    } catch (error) {
-      toastError(error?.message)
-    }
+    await deleteBlog(blogId)
   };
-
+  
+  if(error){
+    toastError(error.data.message)
+  }
   if (delLoading) return <Loading />
   if (isSuccess) {
     toastSuccess("Blog deleted successfully");

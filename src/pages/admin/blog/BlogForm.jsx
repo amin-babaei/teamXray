@@ -65,7 +65,7 @@ const BlogForm = () => {
     formData.append('imageUrl', blogData.imageUrl);
     try {
       if (pathname === '/admin/blog/create') {
-        addNewBlog(formData);
+        await addNewBlog(formData).unwrap();
       } else {
         await updateBlog({ id: data.blog[0]._id, ...blogData, imageUrl: formData.get('imageUrl') }).unwrap();
       }

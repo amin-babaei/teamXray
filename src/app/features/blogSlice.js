@@ -33,19 +33,27 @@ export const blogSlice = createApi({
         url: `/blog/${id}`,
         method: "PUT",
         body: data,
-        credentials:"include"
+        credentials: "include"
       }),
-      invalidatesTags: (result, error, arg) => [
-        { type: "BLOG", id: arg._id },
-      ],
+      invalidatesTags: (result, error, arg) => {
+        if (!error) {
+          return [{ type: "BLOG", id: arg._id }];
+        }
+        return [];
+      },
     }),
     deleteBlog: builder.mutation({
       query: (blogId) => ({
         url: `/blog/${blogId}`,
-        method: 'DELETE',
-        credentials:"include"
+        method: "DELETE",
+        credentials: "include"
       }),
-      invalidatesTags: ['BLOG'],
+      invalidatesTags: (result, error, blogId) => {
+        if (!error) {
+          return [{ type: "BLOG", id: blogId }];
+        }
+        return [];
+      },
     }),
   }),
 });

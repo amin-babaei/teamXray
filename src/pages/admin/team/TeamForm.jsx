@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useReducer } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewTeam, fetchTeam, updateTeam } from '../../../app/features/team/teamAction';
 import {  toastSuccess } from '../../../helpers/Toast';
@@ -38,10 +38,10 @@ const TeamForm = () => {
   const { title } = useParams();
   const { pathname } = useLocation();
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = useCallback((e) => {
     const { name, value } = e.target;
     dispatch({ type: 'setPlayer', payload: { ...state.player, [name]: value } });
-  };
+  },[state.player]);
 
   useEffect(() => {
     if(pathname.includes(title)){
@@ -57,16 +57,16 @@ useEffect(() => {
   }
 }, [pathname, team, title]);
 
-  const handleAddPlayer = () => {
+  const handleAddPlayer = useCallback(() => {
     dispatch({ type: 'setSubmittedPlayer', payload: [...state.submittedPlayer, state.player] });
     dispatch({ type: 'setPlayer', payload: initialState.player });
-  }
+  },[state.player, state.submittedPlayer])
 
-  const handleDeletePlayer = (index) => {
+  const handleDeletePlayer = useCallback((index) => {
     const updatedPlayers = [...state.submittedPlayer];
     updatedPlayers.splice(index, 1);
     dispatch({ type: 'setSubmittedPlayer', payload: updatedPlayers });
-  };
+  },[state.submittedPlayer]);
   
   const handleSubmit = async (event) => {
     event.preventDefault();

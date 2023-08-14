@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewTeam, fetchTeam, updateTeam } from '../../../app/features/team/teamAction';
-import {  toastSuccess } from '../../../helpers/Toast';
+import {  toastError, toastSuccess } from '../../../helpers/Toast';
 import AddPlayer from './AddPlayer';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { selectPlayer } from '../../../app/features/team/teamSlice';
@@ -58,8 +58,12 @@ useEffect(() => {
 }, [pathname, team, title]);
 
   const handleAddPlayer = useCallback(() => {
-    dispatch({ type: 'setSubmittedPlayer', payload: [...state.submittedPlayer, state.player] });
-    dispatch({ type: 'setPlayer', payload: initialState.player });
+    if (state.player.playerName.trim() !== "") {
+      dispatch({ type: 'setSubmittedPlayer', payload: [...state.submittedPlayer, state.player] });
+      dispatch({ type: 'setPlayer', payload: initialState.player });
+    } else {
+      toastError("Player name cannot be empty");
+    }
   },[state.player, state.submittedPlayer])
 
   const handleDeletePlayer = useCallback((index) => {

@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, memo, useState } from "react";
 
-const AddPlayer = memo(({ player, changeInput, addPlayer, deletePlayer, submittedPlayer }) => {
-  const { playerName, game, youtube, instagram, twitch, twitter } = player;
+const AddPlayer = memo(({ player, changeInput, addPlayer, deletePlayer, handleImagePlayer,submittedPlayer }) => {
+  const { name, game, youtube, instagram, twitch, twitter } = player;
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -70,8 +70,8 @@ const AddPlayer = memo(({ player, changeInput, addPlayer, deletePlayer, submitte
                       type="text"
                       className="text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm"
                       placeholder="name"
-                      name="playerName"
-                      value={playerName}
+                      name="name"
+                      value={name}
                       onChange={changeInput}
                     />
                     <input
@@ -114,7 +114,7 @@ const AddPlayer = memo(({ player, changeInput, addPlayer, deletePlayer, submitte
                       value={twitter}
                       onChange={changeInput}
                     />
-                    <input type="file" name="image" className='text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm'/>
+                    <input type="file" name="image" className='text-white bg-black placeholder-gray-300 shadow-md shadow-xred border-none outline-none rounded-md w-full px-4 py-3 text-sm' onChange={e => handleImagePlayer(e.target.files[0])}/>
                     <button type="button" className="btn font-bold" onClick={addPlayer}>Add player</button>
                   </form>
                 </Dialog.Panel>

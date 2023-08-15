@@ -47,8 +47,8 @@ export const addNewTeam = createAsyncThunk(
       const response = await newTeam(team);
       return response.data;
     } catch (error) {
-      toastError(error?.response?.data?.message)
-    return rejectWithValue(error?.response?.data);
+      toastError(error?.response?.data?.error || error?.response?.data?.message)
+    return rejectWithValue(error?.response?.data?.error || error?.response?.data?.message);
   }
 });
 export const updateTeam = createAsyncThunk(
@@ -58,7 +58,7 @@ export const updateTeam = createAsyncThunk(
       const response = await editTeam(id, team);
       return response.data;
     } catch (error) {
-      toastError(error?.response?.data?.message)
-      return rejectWithValue(error?.response?.data);
+      toastError(error?.response?.data?.error || error?.response?.data?.message)
+      return rejectWithValue(error?.response?.data?.error || error?.response?.data?.message);
   }
 });

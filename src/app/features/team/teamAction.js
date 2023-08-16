@@ -32,11 +32,13 @@ export const fetchTeam = createAsyncThunk(
 )
 export const removedTeam = createAsyncThunk(
   "/teams/deleteTeam",
-  async (teamId) => {
+  async (teamId, { rejectWithValue }) => {
     try {
-      await deleteTeam(teamId);
+      const response  = await deleteTeam(teamId);
+      return response
     } catch (error) {
       toastError(error?.response?.data?.message)
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );

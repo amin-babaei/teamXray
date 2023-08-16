@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams, removedTeam } from '../../../app/features/team/teamAction';
 import { selectAllTeams } from '../../../app/features/team/teamSlice';
 import { Link } from 'react-router-dom';
+import { toastSuccess } from '../../../helpers/Toast';
 
 const AdminTeam = () => {
   const allTeams = useSelector(selectAllTeams)
@@ -18,8 +19,16 @@ const AdminTeam = () => {
     }
   }, [dispatch, status]);
 
-  const removeTeam = (teamId) => {
-    dispatch(removedTeam(teamId));
+  const removeTeam = async (teamId) => {
+    try{
+      const { status } = await dispatch(removedTeam(teamId)).unwrap();
+      if(status === 200){
+        toastSuccess('team deleted successfuly')
+        dispatch(fetchTeams());
+      }
+    }catch(err){
+      throw err
+    }
   };
   return (
     <div className='containerr py-10 min-h-screen'>

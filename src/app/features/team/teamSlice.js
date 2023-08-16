@@ -48,7 +48,7 @@ const teamSlice = createSlice({
         state.player.error = action.error.message;
       })
       .addCase(removedTeam.fulfilled, (state, action) => {
-        teamsAdapter.removeOne(state, action.payload);
+        teamsAdapter.removeOne(state, action.meta.arg);
         state.status = 'completed';
       })
       .addCase(removedTeam.pending, (state) => {

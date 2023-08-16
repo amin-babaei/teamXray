@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewTeam, fetchTeam, updateTeam } from '../../../app/features/team/teamAction';
+import { addNewTeam, fetchTeam, fetchTeams, updateTeam } from '../../../app/features/team/teamAction';
 import {  toastError, toastSuccess } from '../../../helpers/Toast';
 import AddPlayer from './AddPlayer';
 import { Link, useLocation, useParams } from 'react-router-dom';
@@ -62,14 +62,16 @@ useEffect(() => {
     data.append('image', imagePlayer);
 
     if (pathname.includes(title)) {
-      const { error } = await reduxDispatch(updateTeam({id : team[0]._id, team: data}));
+      const { error } = await reduxDispatch(updateTeam({id : team[0]._id, team: data})).unwrap();
       if(!error){
         toastSuccess('Team updated successfully');
+        reduxDispatch(fetchTeams())
       }
     } else {
-        const { error } = await reduxDispatch(addNewTeam(data));
+        const { error } = await reduxDispatch(addNewTeam(data)).unwrap();
         if (!error) {
           toastSuccess('Team created successfully');
+          reduxDispatch(fetchTeams())
         }
     }
   };

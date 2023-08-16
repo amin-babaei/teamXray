@@ -10,6 +10,7 @@ const store = configureStore({
     [blogSlice.reducerPath]: blogSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(blogSlice.middleware),
+    getDefaultMiddleware({serializableCheck:false}).concat(blogSlice.middleware),
+
 })
 export default store

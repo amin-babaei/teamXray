@@ -28,7 +28,7 @@ const Apply = () => {
   };
 
   return (
-    <section className="bg-black py-16">
+    <section className="bg-black py-16 section-over">
       <h1 className="text-center mb-16 text-white text-3xl font-main">
         Apply xray team
       </h1>

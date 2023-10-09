@@ -3,7 +3,7 @@ import { dataAbout } from "./../data/dataAbout";
 import { Helmet } from "react-helmet-async";
 const About = () => {
   return (
-    <main className="bg-black pb-16">
+    <main className="bg-black pb-16 section-over">
       <Helmet>
         <meta charSet="utf-8" />
         <title>xrayTeam-About</title>

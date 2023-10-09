@@ -30,6 +30,9 @@
     .input{
         @apply w-full h-full py-2 px-3 mb-10 outline-none bg-transparent border-b border-white
     }
+    .section-over{
+        @apply relative min-h-screen z-10 sm:mb-[580px]
+    }
 }
 /* change color autofill inputs*/
 input:-webkit-autofill,

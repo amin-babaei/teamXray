@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-layout font-main fixed w-full bottom-0 h-[100vh] sm:h-[580px] z-[-1]">
+    <footer className="bg-layout font-main sm:fixed w-full sm:bottom-0 sm:h-[580px] z-[-1]">
       <div className="containerr">
-        <div className="grid grid-cols-1 gap-6 justify-between items-baseline sm:grid-cols-3 pt-5 sm:pt-10">
+        <div className="grid grid-cols-1 gap-6 justify-between items-baseline sm:grid-cols-3 pt-20 sm:pt-10">
         <div className="sm:my-0">
             <h3 className="text-center sm:text-left mb-10 text-lg">social media</h3>
             <div className="flex sm:flex-col justify-around my-5">
@@ -70,7 +70,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="flex justify-between pb-[60px] absolute w-full bottom-2 right-0 left-0 px-5 sm:pb-0">
+        <div className="flex justify-between pb-[60px] mt-10 flex-wrap sm:absolute w-full sm:bottom-2 sm:right-0 sm:left-0 sm:px-3 sm:pb-0">
           <h2 className="text-gray-400 text-xs">
             © {new Date().getFullYear()} xrayteam. All right reserved.
           </h2>

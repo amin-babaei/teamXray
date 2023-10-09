@@ -22,7 +22,7 @@ const Login =() => {
   }, [navigate, userInfo])
 
   return (
-    <main className='bg-black'>
+    <main className='bg-black section-over'>
        <Helmet>
         <meta charSet="utf-8" />
         <title>xrayTeam-Login</title>

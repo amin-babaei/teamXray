@@ -18,7 +18,7 @@ const SingleTeam = () => {
 },[dispatch, title])
 
   return (
-    <section className="bg-black font-main min-h-screen">
+    <section className="bg-black font-main section-over">
       <Helmet>
         <title>{title.split("-").join(" ")}</title>
       </Helmet>

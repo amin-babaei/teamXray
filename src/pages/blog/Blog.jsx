@@ -18,7 +18,7 @@ const Blog = () => {
   };
 
   return (
-    <main className="bg-black font-main">
+    <main className="bg-black font-main section-over">
        <Helmet>
         <title>xrayTeam-Blogs</title>
         <meta name="description" content="blogs xray team" />

@@ -10,7 +10,7 @@ const SingleBlog = () => {
   const { data, isLoading, isError } = useGetBlogQuery(title);
 
   return (
-    <section className='bg-black py-16 font-xcontent min-h-screen'>
+    <section className='bg-black py-16 font-xcontent section-over'>
       <Helmet>
         <title>{title.split("-").join(" ")}</title>
       </Helmet>

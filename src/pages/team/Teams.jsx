@@ -18,7 +18,7 @@ const Teams = () => {
 }, [dispatch, status]);
 
   return (
-    <section className="bg-black font-main min-h-screen">
+    <section className="bg-black font-main section-over">
        <Helmet>
         <meta charSet="utf-8" />
         <title>xrayTeam-Teams</title>

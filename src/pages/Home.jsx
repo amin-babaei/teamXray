@@ -17,7 +17,7 @@ const Home = () => {
       </Helmet>
       <Header />
       <Mobile />
-      <main className='font-main relative min-h-screen z-10 mb-[100vh] sm:mb-[580px]'>
+      <main className='font-main section-over'>
         <Twitch />
         <Players />
         <Blog />

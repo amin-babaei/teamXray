@@ -6,13 +6,13 @@
   background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(218,24,45,1) 100%);
 }
 .swiper-button-next,.swiper-button-prev{
-  background-color: red;
   width: 40px !important;
   height: 60px !important;
   top:40% !important;
+  font-weight: bold;
 }
 .swiper-button-next:after, .swiper-button-prev:after{
-  color: black;
+  color: red;
   font-size: 25px !important;
 }
 .swiper-button-next{

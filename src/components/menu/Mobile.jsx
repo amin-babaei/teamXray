@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 const Mobile = () => {
   return (
     <nav className="fixed bottom-0 w-full sm:hidden z-50">
-      <ul className="flex justify-around text-white bg-black">
-        <li className="block sm:hidden py-4 text-sm">
+      <ul className="flex justify-around text-white bg-black font-bold uppercase">
+        <li className="block sm:hidden py-5 text-sm">
           <NavLink
             to={"/"}
             className={({ isActive }) =>
@@ -14,7 +14,7 @@ const Mobile = () => {
             Home
           </NavLink>
         </li>
-        <li className="block sm:hidden py-4 text-sm">
+        <li className="block sm:hidden py-5 text-sm">
           <NavLink
             to={"/about"}
             className={({ isActive }) =>
@@ -24,7 +24,7 @@ const Mobile = () => {
             About
           </NavLink>
         </li>
-        <li className="block sm:hidden py-4 text-sm">
+        <li className="block sm:hidden py-5 text-sm">
           <NavLink
             to={"/teams"}
             className={({ isActive }) =>
@@ -34,7 +34,7 @@ const Mobile = () => {
             teams
           </NavLink>
         </li>
-        <li className="block sm:hidden py-4 text-sm">
+        <li className="block sm:hidden py-5 text-sm">
           <NavLink
             to={"/blogs"}
             className={({ isActive }) =>
@@ -44,7 +44,7 @@ const Mobile = () => {
             Blogs
           </NavLink>
         </li>
-        <li className="block sm:hidden py-4 text-sm">
+        <li className="block sm:hidden py-5 text-sm">
           <NavLink
             to={"/apply"}
             className={({ isActive }) =>

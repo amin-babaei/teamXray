@@ -5,7 +5,6 @@ import Players from '../components/players/Players';
 import Blog from '../components/blog/Blog';
 import ContactUs from '../components/ContactUs';
 import Partners from './../components/Partners';
-import Mobile from './../components/menu/Mobile';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
@@ -16,7 +15,6 @@ const Home = () => {
         <title>xrayTeam</title>
       </Helmet>
       <Header />
-      <Mobile />
       <main className='font-main section-over'>
         <Twitch />
         <Players />

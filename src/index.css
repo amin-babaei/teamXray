@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    scrollbar-track-color: #253341;
+    scrollbar-color: rgb(212, 212, 216) #253341;
+    scrollbar-width: thin;
+  }
+
 @font-face {
     font-family: "xray";
     src: url("/public/fonts/BatmanForeverAlternate.eot");
@@ -14,6 +20,15 @@
     font-display: swap;
   }
   
+@layer base {
+    ::-webkit-scrollbar {
+      @apply w-2 bg-[#253341]
+    }
+    ::-webkit-scrollbar-thumb {
+      @apply bg-zinc-300 rounded
+    }
+}
+
 @layer components{
     .containerr{
         @apply container mx-auto px-5 text-white
